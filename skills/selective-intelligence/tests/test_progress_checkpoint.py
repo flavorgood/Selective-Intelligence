@@ -199,6 +199,200 @@ class ProgressCheckpointTests(unittest.TestCase):
                     result="duplicate owner",
                 )
 
+class CheckpointSelectionTests(unittest.TestCase):
+    """Real local Git/filesystem and fresh CLI processes; no external services."""
+
+    def setUp(self):
+        self.temporary = tempfile.TemporaryDirectory(prefix="si-resume-selection-")
+        self.addCleanup(self.temporary.cleanup)
+        self.root = ProgressCheckpointTests().make_repository(Path(self.temporary.name) / "work")
+        self.tracked = self.root / ".selective-intelligence/progress/latest.json"
+        self.private = progress_checkpoint._private_root(self.root, "progress") / "latest.json"
+
+    def save(self, name, commit=False):
+        return progress_checkpoint.save_checkpoint(
+            root=self.root, outcome=name, next_safe_action="Continue " + name,
+            completed=[name], paths=["owned.txt"], commit=commit,
+        )
+
+    def pair(self):
+        tracked = self.save("committed milestone", commit=True)
+        private = self.save("new local work")
+        return tracked, private
+
+    def read(self, path):
+        return json.loads(path.read_text(encoding="utf-8"))
+
+    def write(self, path, record):
+        path.write_text(json.dumps(record) + "\n", encoding="utf-8")
+
+    def status(self):
+        return progress_checkpoint.checkpoint_status(self.root)
+
+    def snapshot(self):
+        paths = [self.tracked, self.private, self.private.parent / "last-operation.json",
+                 self.root / "owned.txt", self.root / "unrelated.txt", self.root / ".git/index"]
+        return {str(path): path.read_bytes() for path in paths if path.is_file()}
+
+    def cli(self, *args):
+        return subprocess.run(
+            [sys.executable, "-B", str(SCRIPTS / "progress_checkpoint.py"), *args,
+             "--root", str(self.root)], capture_output=True, text=True, timeout=15,
+        )
+
+    def test_new_local_checkpoint_survives_a_fresh_cli_process(self):
+        # All save/status calls cross real OS process boundaries.
+        first = self.cli("save", "--outcome", "committed milestone", "--next", "Old next step",
+                         "--path", "owned.txt", "--commit")
+        self.assertEqual(first.returncode, 0, first.stderr + first.stdout)
+        second = self.cli("save", "--outcome", "new local work", "--next", "New next step",
+                          "--path", "owned.txt")
+        self.assertEqual(second.returncode, 0, second.stderr + second.stdout)
+        local = json.loads(second.stdout)
+        before = self.snapshot()
+        result = self.cli("status")
+        self.assertEqual(result.returncode, 0, result.stderr + result.stdout)
+        state = json.loads(result.stdout)
+        self.assertEqual(state["latestCheckpoint"]["checkpointId"], local["checkpointId"])
+        self.assertEqual(state["latestCheckpoint"]["progress"]["nextSafeAction"], "New next step")
+        self.assertEqual(state["checkpointSource"], "private")
+        self.assertFalse(state["checkpointExternalStateVerified"])
+        self.assertEqual(self.snapshot(), before, "Reading status must preserve saved work and Git index")
+
+    def test_newer_committed_checkpoint_supersedes_old_local_checkpoint(self):
+        self.save("old local work")
+        latest = self.save("later committed milestone", commit=True)
+        self.assertEqual(self.status()["latestCheckpoint"]["checkpointId"], latest["checkpointId"])
+
+    def test_private_only_checkpoint_is_still_readable(self):
+        latest = self.save("local only")
+        self.assertEqual(self.status()["latestCheckpoint"]["checkpointId"], latest["checkpointId"])
+
+    def test_tracked_only_checkpoint_is_still_readable(self):
+        latest = self.save("tracked only", commit=True)
+        self.assertEqual(self.status()["latestCheckpoint"]["checkpointId"], latest["checkpointId"])
+
+    def test_missing_checkpoint_does_not_invent_one(self):
+        self.assertIsNone(self.status()["latestCheckpoint"])
+
+    def test_non_git_project_keeps_one_local_checkpoint_location(self):
+        root = Path(self.temporary.name) / "non-git"
+        root.mkdir()
+        saved = progress_checkpoint.save_checkpoint(
+            root=root, outcome="local project", next_safe_action="Continue local project",
+        )
+        state = progress_checkpoint.checkpoint_status(root)
+        self.assertEqual(state["latestCheckpoint"]["checkpointId"], saved["checkpointId"])
+        self.assertIsNone(state["currentHead"])
+
+    def test_filesystem_modification_time_does_not_override_record_time(self):
+        import os
+        _, latest = self.pair()
+        os.utime(self.tracked, (2_000_000_000, 2_000_000_000))
+        os.utime(self.private, (1, 1))
+        self.assertEqual(self.status()["latestCheckpoint"]["checkpointId"], latest["checkpointId"])
+
+    def test_timestamp_order_uses_actual_instant_not_lexical_offset(self):
+        _, latest = self.pair()
+        tracked, private = self.read(self.tracked), self.read(self.private)
+        tracked["createdAt"] = "2026-10-14T17:59:59Z"
+        private["createdAt"] = "2026-10-14T13:00:00-05:00"
+        self.write(self.tracked, tracked)
+        self.write(self.private, private)
+        self.assertEqual(self.status()["latestCheckpoint"]["checkpointId"], latest["checkpointId"])
+
+    def test_identical_records_prefer_the_tracked_copy(self):
+        self.pair()
+        self.private.write_bytes(self.tracked.read_bytes())
+        state = self.status()
+        self.assertEqual(state["latestCheckpoint"], self.read(self.tracked))
+        self.assertEqual(state["checkpointSource"], "tracked")
+
+    def test_equal_instant_with_different_records_requires_reconciliation(self):
+        self.pair()
+        tracked, private = self.read(self.tracked), self.read(self.private)
+        tracked["createdAt"] = "2026-10-14T18:00:00+00:00"
+        private["createdAt"] = "2026-10-14T13:00:00-05:00"
+        self.write(self.tracked, tracked)
+        self.write(self.private, private)
+        before = self.snapshot()
+        result = self.cli("status")
+        self.assertEqual(result.returncode, 1)
+        self.assertEqual(json.loads(result.stdout)["status"], "error")
+        self.assertEqual(self.snapshot(), before)
+
+    def test_same_checkpoint_identity_with_changed_content_is_not_ranked_by_time(self):
+        self.pair()
+        private = self.read(self.private)
+        private["checkpointId"] = self.read(self.tracked)["checkpointId"]
+        self.write(self.private, private)
+        with self.assertRaises(progress_checkpoint.ProgressCheckpointError):
+            self.status()
+
+    def test_unreadable_private_record_is_not_hidden_by_a_tracked_record(self):
+        self.pair()
+        self.private.write_text("not-json\n", encoding="utf-8")
+        before = self.snapshot()
+        with self.assertRaises(progress_checkpoint.ProgressCheckpointError):
+            self.status()
+        self.assertEqual(self.snapshot(), before)
+
+    def test_unreadable_tracked_record_is_not_hidden_by_a_newer_private_record(self):
+        self.pair()
+        self.tracked.write_text("not-json\n", encoding="utf-8")
+        with self.assertRaises(progress_checkpoint.ProgressCheckpointError):
+            self.status()
+
+    def test_unorderable_timestamps_are_not_guessed(self):
+        self.pair()
+        original = self.read(self.private)
+        for timestamp in [None, 7, "bad-time", "2026-10-14T18:00:00", "2026-10-14"]:
+            with self.subTest(timestamp=timestamp):
+                private = dict(original)
+                private["createdAt"] = timestamp
+                self.write(self.private, private)
+                with self.assertRaises(progress_checkpoint.ProgressCheckpointError):
+                    self.status()
+
+    def test_private_record_from_another_branch_cannot_be_silently_resumed(self):
+        self.pair()
+        subprocess.run(["git", "switch", "-c", "task/other"], cwd=self.root,
+                       capture_output=True, check=True)
+        before = self.snapshot()
+        with self.assertRaises(progress_checkpoint.ProgressCheckpointError):
+            self.status()
+        self.assertEqual(self.snapshot(), before)
+
+    def test_symlink_checkpoint_is_not_followed_or_treated_as_absent(self):
+        self.pair()
+        target = Path(self.temporary.name) / "outside.json"
+        target.write_bytes(self.private.read_bytes())
+        self.private.unlink()
+        try:
+            self.private.symlink_to(target)
+        except OSError as exc:
+            self.skipTest(f"Host cannot create symlinks: {exc}")
+        for exists in [True, False]:
+            with self.subTest(target_exists=exists):
+                if not exists:
+                    target.unlink()
+                with self.assertRaises(progress_checkpoint.ProgressCheckpointError):
+                    self.status()
+
+    def test_non_file_checkpoint_is_not_silently_ignored(self):
+        self.pair()
+        self.private.unlink()
+        self.private.mkdir()
+        with self.assertRaises(progress_checkpoint.ProgressCheckpointError):
+            self.status()
+
+    def test_detached_head_cannot_adopt_a_branch_bound_private_record(self):
+        self.pair()
+        subprocess.run(["git", "switch", "--detach"], cwd=self.root,
+                       capture_output=True, check=True)
+        with self.assertRaises(progress_checkpoint.ProgressCheckpointError):
+            self.status()
+
 
 if __name__ == "__main__":
     unittest.main()
