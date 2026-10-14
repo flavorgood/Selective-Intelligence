@@ -5,10 +5,10 @@ This file is the durable cross-project entry point for the owner's primary syste
 ## Scope
 
 Primary systems:
-- TradeScout — `infotradescout/tradescoutAI`
-- MealScout — `infotradescout/MealScout`
-- Sway — `infotradescout/sway.tips`
-- Selective Intelligence — `infotradescout/Selective-Intelligence`
+- TradeScout — `flavorgood/tradescoutAI`
+- MealScout — `flavorgood/MealScout`
+- Sway — `flavorgood/sway.tips`
+- Selective Intelligence — `flavorgood/Selective-Intelligence`
 
 Essential TradeScout-owned lanes:
 - JW Stone / stone inventory, receiving, pricing/cart/access
@@ -21,13 +21,15 @@ Side repositories are not part of the default main-system execution loop merely 
 
 On every new main-system Work/Codex session:
 1. Read the target repo `AGENTS.md` and current SI rules.
-2. Inspect the newest relevant open PR(s) and their current head/base before broad repository search.
-3. Treat those PR bodies, exact revisions, evidence receipts, and linked handoffs as the starting breakpoint.
+2. Start from the existing task, named PR, branch, and latest relevant handoff. Read that PR's current repository metadata regardless of whether it is open, closed, or merged; do not search only open PRs. Record the observed repository identity, head/base, state, merged flag, merge commit, and observation time before selecting work.
+3. Reconcile the handoff with that metadata. PR prose and dated checkpoints are historical evidence, not current status: an old "unmerged" sentence cannot override a merged record, and a closed unmerged PR does not prove delivery. Check any named superseding or integration PR before starting another candidate. Read the owning deployment provider only when the next transition depends on deployment; a merge never proves deployment or live acceptance. Preserve valid earlier evidence with its original revision and scope.
 4. Continue from the first unproved transition. Do not repeat already-proved audits, builds, browser matrices, or broad tests unless later changes invalidate them.
 5. Keep independent lanes moving concurrently when owners/files/contracts do not overlap.
-6. Before interruption or capacity exhaustion, update the existing PR/handoff with exact current head, completed work, remaining proof, actions not to repeat, and one next safe action.
+6. Before interruption or capacity exhaustion, update the existing PR/handoff with observed source/integration/deployment states and their timestamps, exact current head, completed work, remaining proof, actions not to repeat, and one next safe action. Keep historical failures and unresolved approvals intact. If a current-state read is unavailable, mark that state unknown; do not replay an uncertain write, infer the device is powered off, or stop independent authorized lanes.
 
-## Current breakpoints — 2026-09-13
+## Historical breakpoints — 2026-09-13
+
+The following snapshot is retained for provenance only. It is not the current queue, release order, or a list of work still outstanding. Resolve each relevant named PR through the resume rule above before using its saved evidence. The existing parallel policy applies to currently reconciled work, not automatically to every historical lane below.
 
 ### TradeScout
 Primary integration lane: PR #662 `platform/weekly-release-proof-20260913`.
