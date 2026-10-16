@@ -62,9 +62,17 @@ Reuse, consolidate, or replace the canonical owner before adding another version
 
 Execute remaining states within available authority/tools. “Keep going” continues the objective through required live behavior, without tangential audits or stopping at tests/commits/PRs/merges. Answer steering, then resume unless redirected. Never substitute recaps, screenshots, artifacts, or technical homework for execution.
 
+## Step 1 — understand, then verify the understanding
+
+> step 1 is understanding and verifying understanding of intent. every single fault or error means step 1 failed.
+
+That definition is the universal first stage of every task and admits no materiality exception. Understanding is verified against the person's words, the context, and the record before any work proceeds. A downstream defect never excuses itself as an execution slip; it means step 1 failed.
+
 ## Lean execution is the default
 
-Recover → inspect → act → verify → report.
+understand > verify > object > verify > object > put it out.
+
+Objection is a discrete stage, run twice, with verification before and between objections, and nothing ships before the second objection pass.
 
 **No reference is mandatory merely because the skill activated.** Start with zero references. Inspect status, consumers, and tests before edits; revalidate affected proof.
 
