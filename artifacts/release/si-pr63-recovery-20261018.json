@@ -1,0 +1,812 @@
+{
+  "schema": "si.pr63.recovery_evidence.v1",
+  "observed_source_commit": "b7189e02ed2d22361194de897e7463d553e64aae",
+  "observed_source_tree": "e6c3cdc3c35ccfb078ddcf623037a9088475860c",
+  "main_reconciled": "5dc6441f9b98793bf366fb4e156c89c7a7a7933d",
+  "existing_pr": "https://github.com/flavorgood/Selective-Intelligence/pull/63",
+  "returned_handoff": "https://github.com/flavorgood/tradescoutAI/pull/816#issuecomment-6177018393",
+  "scope": "Source/package correction and bounded Objector instruction exercise. This artifact records local validation; it does not claim main merge, hosted CI, installed adoption, or a live Muse handoff.",
+  "verification_disposition": "All local implementation/package requirements cleared by the independent Objector. The original full-command record remains failed for a temporary cleanup error; the same release-integrity check passed on unchanged source in a dedicated temporary root.",
+  "quality_gate_original": {
+    "schemaVersion": "si.quality_gate.v1",
+    "observedAt": "2026-10-18T03:13:39.855391+00:00",
+    "sourceIdentity": {
+      "gitHead": "b7189e02ed2d22361194de897e7463d553e64aae",
+      "workingTreeDirty": false,
+      "sourceSnapshotSha256": "e21b05976319df119e3fd776619dc4c6905940f42dda586565c8b5221e92bace",
+      "sourceFileCount": 322
+    },
+    "paidServiceRequired": false,
+    "passed": false,
+    "checks": [
+      {
+        "name": "deterministic_controls",
+        "passed": true,
+        "exitCode": 0,
+        "outputSha256": "6be73c5871c21b04b4a57d6bcd592e7b0a370add579253f1f2fd384410b628ad",
+        "outputBytes": 5116
+      },
+      {
+        "name": "council_safeguards",
+        "passed": true,
+        "exitCode": 0,
+        "outputSha256": "172a5f94da1d8c6883f1b784b3a837f73a39654082ffe6f8a6cd561330f584d6",
+        "outputBytes": 2590
+      },
+      {
+        "name": "behavior_evidence_safeguards",
+        "passed": true,
+        "exitCode": 0,
+        "outputSha256": "f923e651d13387e2f026621ddf13e5bd04522c1cf49be453eeee1ab445a8d172",
+        "outputBytes": 388
+      },
+      {
+        "name": "unit_tests",
+        "passed": true,
+        "exitCode": 0,
+        "outputSha256": "e8e3a374d37ba992631dc2c2266e595c510706d9934f7edbfc4dc01fc7c50781",
+        "outputBytes": 425
+      },
+      {
+        "name": "release_integrity",
+        "passed": false,
+        "exitCode": 1,
+        "outputSha256": "3f4cee40bb74f5e15be851e95a5d534a7259c4c74a59f6ec32680dab061be6bd",
+        "outputBytes": 699
+      }
+    ],
+    "boundary": "local deterministic protection; hosted branch enforcement is separate external state"
+  },
+  "quality_gate_commands": [
+    {
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "-B",
+        "/workspace/scratch/0d996fec1bf9/si-verify/skills/selective-intelligence/scripts/eval.py",
+        "controls",
+        "--json",
+        "--skip-release"
+      ],
+      "exit_code": 0,
+      "stdout": "01-stdout.txt",
+      "stderr": "01-stderr.txt"
+    },
+    {
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "-B",
+        "/workspace/scratch/0d996fec1bf9/si-verify/skills/selective-intelligence/scripts/council.py",
+        "self-test"
+      ],
+      "exit_code": 0,
+      "stdout": "02-stdout.txt",
+      "stderr": "02-stderr.txt"
+    },
+    {
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "-B",
+        "/workspace/scratch/0d996fec1bf9/si-verify/skills/selective-intelligence/scripts/behavior_eval.py",
+        "self-test"
+      ],
+      "exit_code": 0,
+      "stdout": "03-stdout.txt",
+      "stderr": "03-stderr.txt"
+    },
+    {
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "/workspace/scratch/0d996fec1bf9/si-verify/skills/selective-intelligence/tests",
+        "-p",
+        "test_*.py"
+      ],
+      "exit_code": 0,
+      "stdout": "04-stdout.txt",
+      "stderr": "04-stderr.txt"
+    },
+    {
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "-B",
+        "/workspace/scratch/0d996fec1bf9/si-verify/skills/selective-intelligence/scripts/release.py",
+        "doctor",
+        "--json"
+      ],
+      "exit_code": 1,
+      "stdout": "05-stdout.txt",
+      "stderr": "05-stderr.txt"
+    }
+  ],
+  "ci_extras": [
+    {
+      "name": "discovery_bridge",
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "-B",
+        "tools/test_discovery_bridge.py"
+      ],
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "name": "native_pointers",
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "-B",
+        "tools/test_native_pointers.py"
+      ],
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "name": "chatgpt_adapter",
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "-B",
+        "tools/test_chatgpt_adapter.py"
+      ],
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "name": "public_plugin",
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "-B",
+        "-m",
+        "unittest",
+        "tools.test_public_plugin"
+      ],
+      "exit_code": 0,
+      "passed": true
+    }
+  ],
+  "release_integrity_targeted_rerun": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+      "-B",
+      "skills/selective-intelligence/scripts/release.py",
+      "doctor",
+      "--json"
+    ],
+    "exit_code": 0,
+    "passed": true,
+    "reason": "Retest only failed release-integrity cleanup at unchanged source, using a dedicated temporary root. Earlier failed output is retained.",
+    "tmpdir": "/workspace/scratch/0d996fec1bf9/coordination-recovery/release-check-tmp",
+    "remaining_tmp_entries": [],
+    "output_sha256": "e86923151f84c9a8bf1da456aa976da3751276b962507593b10b728296bdb851"
+  },
+  "raw_logs": {
+    "01-stderr.txt": "",
+    "01-stdout.txt": "{\n  \"passed\": [\n    \"fresh blocked micro pack validates structurally\",\n    \"Start Pack initializes one truthful project index\",\n    \"seal refuses an invalid Definition Lock atomically\",\n    \"validator enforces governing source schema parity\",\n    \"validator enforces independent-review required fields and status parity\",\n    \"requirement dependency cycles are blocked\",\n    \"parallel owner collision is blocked\",\n    \"malformed arrays produce diagnostics instead of tracebacks\",\n    \"valid Definition and Build locks pass\",\n    \"repeated Definition seal cannot bypass amendment control\",\n    \"amendment authority is bound to prior sealed decision owners\",\n    \"malformed amendment cannot be sealed\",\n    \"authorized amendment can re-lock a changed Definition\",\n    \"independent review requires registered, scoped, revision-bound evidence\",\n    \"repeated Build seal cannot bypass amendment control\",\n    \"interrupted and resumed build checkpoints preserve the semantic lock\",\n    \"checkpoints reject semantic changes and reconciliation claims\",\n    \"checkpoints cannot erase invalidation or silently alter material blockers\",\n    \"validator rejects forged repeated phase history\",\n    \"release transition cannot skip as-built reconciliation\",\n    \"sealed control tampering is detected\",\n    \"reconciled as-built evidence can explicitly clear invalidation\",\n    \"repeated As-built seal cannot bypass amendment control\",\n    \"release closure requires and accepts exact reconciled evidence\",\n    \"feedback preserves negative causes without raw events\",\n    \"feedback rejects identifying UUID versions\",\n    \"feedback preserves custom parent permissions and protects managed stores\",\n    \"feedback rejects symlinked ancestor paths\",\n    \"Council: init creates a valid Start-Pack-bound case\",\n    \"Council: machine candidate defaults to provisional draft before intent challenge\",\n    \"Council: candidate paraphrase cannot authorize a locked intent\",\n    \"Council: intent challenge cannot be asserted as a context-only checkbox\",\n    \"Council: intent challenge stays bound to the exact candidate meaning\",\n    \"Council: canonical digest detects tampering\",\n    \"Council: strict top-level keys reject extras\",\n    \"Council: role passes require distinct contexts\",\n    \"Council: raw prompts are prohibited\",\n    \"Council: secret-like content is prohibited\",\n    \"Council: locked intent cannot retain material open decisions\",\n    \"Council: default-deny rejects an unknown or unruled action\",\n    \"Council: approval-required action blocks without an exact receipt\",\n    \"Council: deny rules take precedence over approvals\",\n    \"Council: read allow remains separate from write authority\",\n    \"Council: mutating allow rules cannot bypass approval\",\n    \"Council: approved actions still cannot cross destination boundaries\",\n    \"Council: budgets require integer minor units\",\n    \"Council: budget expected total must recompute exactly\",\n    \"Council: enabled metered pools require a positive hard limit\",\n    \"Council: price evidence requires an observed date\",\n    \"Council: stale price evidence blocks purchase\",\n    \"Council: non-deterministic trigger-only price evidence blocks purchase\",\n    \"Council: Start Pack digest mismatch is rejected\",\n    \"Council: worker packet is typed and valid\",\n    \"Council: worker response binds to its exact parent\",\n    \"Council: objector export enforces its data boundary\",\n    \"Council: same-model separate context receives honest grade\",\n    \"Council: objector packet is strictly read-only\",\n    \"Council: objector mutation attempts are rejected\",\n    \"Council: findings require a failed test and bounded correction\",\n    \"Council: independence overclaim is rejected\",\n    \"Council: specific objector finding imports\",\n    \"Council: every finding must be disposed exactly once\",\n    \"Council: open findings cannot receive a pass verdict\",\n    \"Council: rejected findings still require evidence\",\n    \"Council: aligned verdict cannot claim provisional intent is resolved\",\n    \"Council: Objector context cannot also serve as Aligner\",\n    \"Council: blocking sustained finding cannot pass the workflow gate\",\n    \"Council: material correction requires invalidation and revalidation\",\n    \"Council: complete alignment cross-validates\",\n    \"Council: material correction invalidates old proof\",\n    \"Council: material correction records replacement proof\",\n    \"Council: closed findings can reach verified state\",\n    \"Council: resume packet is complete and valid\",\n    \"Council: restrictive provenance ledger validates\",\n    \"Council: provenance chain tampering is rejected\",\n    \"Council: provenance actor identity is bound to its role run\",\n    \"Council: material provenance records validation and correction status\",\n    \"Council: ambiguous attempted actions block idempotent resume\",\n    \"intent and product-design behavior cases validate without claiming execution\",\n    \"project index inventories code, flags UI proliferation, and detects staleness\",\n    \"behavior evidence requires captured outputs, digests, independent grading, and improvement frontiers\"\n  ],\n  \"count\": 81\n}\n",
+    "02-stderr.txt": "",
+    "02-stdout.txt": "PASS: init creates a valid Start-Pack-bound case\nPASS: machine candidate defaults to provisional draft before intent challenge\nPASS: candidate paraphrase cannot authorize a locked intent\nPASS: intent challenge cannot be asserted as a context-only checkbox\nPASS: intent challenge stays bound to the exact candidate meaning\nPASS: canonical digest detects tampering\nPASS: strict top-level keys reject extras\nPASS: role passes require distinct contexts\nPASS: raw prompts are prohibited\nPASS: secret-like content is prohibited\nPASS: locked intent cannot retain material open decisions\nPASS: default-deny rejects an unknown or unruled action\nPASS: approval-required action blocks without an exact receipt\nPASS: deny rules take precedence over approvals\nPASS: read allow remains separate from write authority\nPASS: mutating allow rules cannot bypass approval\nPASS: approved actions still cannot cross destination boundaries\nPASS: budgets require integer minor units\nPASS: budget expected total must recompute exactly\nPASS: enabled metered pools require a positive hard limit\nPASS: price evidence requires an observed date\nPASS: stale price evidence blocks purchase\nPASS: non-deterministic trigger-only price evidence blocks purchase\nPASS: Start Pack digest mismatch is rejected\nPASS: worker packet is typed and valid\nPASS: worker response binds to its exact parent\nPASS: objector export enforces its data boundary\nPASS: same-model separate context receives honest grade\nPASS: objector packet is strictly read-only\nPASS: objector mutation attempts are rejected\nPASS: findings require a failed test and bounded correction\nPASS: independence overclaim is rejected\nPASS: specific objector finding imports\nPASS: every finding must be disposed exactly once\nPASS: open findings cannot receive a pass verdict\nPASS: rejected findings still require evidence\nPASS: aligned verdict cannot claim provisional intent is resolved\nPASS: Objector context cannot also serve as Aligner\nPASS: blocking sustained finding cannot pass the workflow gate\nPASS: material correction requires invalidation and revalidation\nPASS: complete alignment cross-validates\nPASS: material correction invalidates old proof\nPASS: material correction records replacement proof\nPASS: closed findings can reach verified state\nPASS: resume packet is complete and valid\nPASS: restrictive provenance ledger validates\nPASS: provenance chain tampering is rejected\nPASS: provenance actor identity is bound to its role run\nPASS: material provenance records validation and correction status\nPASS: ambiguous attempted actions block idempotent resume\n",
+    "03-stderr.txt": "",
+    "03-stdout.txt": "{\n  \"passed\": true,\n  \"checks\": [\n    \"valid evidence-bearing partial run accepted\",\n    \"captured output digest mismatch rejected\",\n    \"worker view excludes hidden oracle\"\n  ],\n  \"worker_view_keys\": [\n    \"case_digest\",\n    \"case_id\",\n    \"domain\",\n    \"output_contract\",\n    \"risk\",\n    \"schema_version\",\n    \"suite\",\n    \"task\"\n  ],\n  \"hidden_oracle_exposed\": false,\n  \"errors\": []\n}\n",
+    "04-stderr.txt": "....................................................................................................................................................................................................................................................................................................................................\n----------------------------------------------------------------------\nRan 324 tests in 25.697s\n\nOK\n",
+    "04-stdout.txt": "",
+    "05-stderr.txt": "",
+    "05-stdout.txt": "{\n  \"ready\": false,\n  \"mode\": \"local_package\",\n  \"donations_checked\": false,\n  \"file_count\": 118,\n  \"canonical_repository\": \"https://github.com/infotradescout/Selective-Intelligence\",\n  \"support_url_configured\": false,\n  \"model_behavior_ready\": false,\n  \"prompt_budget\": {\n    \"core_words\": 1083,\n    \"core_characters\": 9205,\n    \"max_core_words\": 1500,\n    \"max_core_characters\": 12000\n  },\n  \"errors\": [\n    \"owned executable-eval cleanup failed: [Errno 39] Directory not empty: PosixPath('/workspace/scratch/0d996fec1bf9/coordination-recovery/test-tmp/selective-intelligence-eval-host-qari6dn_')\",\n    \"owned executable-eval cleanup left residue: selective-intelligence-eval-host-qari6dn_\"\n  ]\n}\n",
+    "chatgpt_adapter-stderr.txt": "",
+    "chatgpt_adapter-stdout.txt": "{\n  \"status\": \"pass\",\n  \"files\": 59,\n  \"skill_entrypoints\": [\n    \"SKILL.md\"\n  ]\n}\n",
+    "discovery_bridge-stderr.txt": "...........\n----------------------------------------------------------------------\nRan 11 tests in 0.094s\n\nOK\n",
+    "discovery_bridge-stdout.txt": "",
+    "native_pointers-stderr.txt": ".......\n----------------------------------------------------------------------\nRan 7 tests in 0.027s\n\nOK\n",
+    "native_pointers-stdout.txt": "",
+    "public_plugin-stderr.txt": "....\n----------------------------------------------------------------------\nRan 4 tests in 4.723s\n\nOK\n",
+    "public_plugin-stdout.txt": "",
+    "release-integrity-rerun-stderr.txt": "",
+    "release-integrity-rerun-stdout.txt": "{\n  \"ready\": true,\n  \"mode\": \"local_package\",\n  \"donations_checked\": false,\n  \"file_count\": 118,\n  \"canonical_repository\": \"https://github.com/infotradescout/Selective-Intelligence\",\n  \"support_url_configured\": false,\n  \"model_behavior_ready\": false,\n  \"prompt_budget\": {\n    \"core_words\": 1083,\n    \"core_characters\": 9205,\n    \"max_core_words\": 1500,\n    \"max_core_characters\": 12000\n  },\n  \"errors\": []\n}\n"
+  },
+  "package": {
+    "passed": true,
+    "source_commit": "b7189e02ed2d22361194de897e7463d553e64aae",
+    "runtime_files": 59,
+    "roles": 7,
+    "entrypoint": "SKILL.md",
+    "local_markdown_links_checked": 42,
+    "missing_links": [],
+    "canonical_words": 1083,
+    "canonical_characters": 9205,
+    "adapter_regex_words": 1195,
+    "adapter_characters": 9430,
+    "archive_sha256": "46271c1a8458ea17a7c9ed5a79c7b0201c31da968ed1d1dc6c1beab2af24d04c",
+    "source_manifest_sha256": "ba6ce62625af30ee29db93e0e4d46ce25ff432180ab3df470decc893b9b54080"
+  },
+  "objector_source_review": {
+    "reviewed_revision": "b7189e02ed2d22361194de897e7463d553e64aae",
+    "reviewed_tree": "e6c3cdc3c35ccfb078ddcf623037a9088475860c",
+    "base_revision": "96cb15da82b613764b4ab006100461a191f58511",
+    "scope": {
+      "type": "independent_semantic_delta_closure_review",
+      "files": [
+        "skills/selective-intelligence/SKILL.md"
+      ],
+      "boundary": "Frozen final core delta against the existing PASS; exact description equality checked against 3d520fe5ec2ebd845c43e0327ae3257e7b3ef03c. Prior semantic closures are carried forward."
+    },
+    "objections": [],
+    "unresolved_blocking_objections": 0,
+    "verdict": "PASS",
+    "findings": [
+      "The original canonical description is restored verbatim from 3d520fe5ec2ebd845c43e0327ae3257e7b3ef03c.",
+      "The only remaining delta removes a redundant opening sentence and shortens two reference link labels; both link targets are unchanged.",
+      "The reviewed delta changes no operative activation, authority, Step 1, two-pass, independence, closure, proof, safety, public-tier parity, resume, or completion rule.",
+      "No new evidence invalidates any prior semantic closure; zero blocking objections remain in this source review."
+    ],
+    "source_metrics": {
+      "whitespace_words": 1083,
+      "characters": 9205
+    },
+    "source_sha256": "54f8c0594f092b53d3f727405727284381c8c099c51cf44b8e93ffe44dfd7c6b",
+    "required_verification": {
+      "status": "pending_parent_evidence",
+      "checks": [
+        "canonical full quality gate",
+        "final CI extras"
+      ],
+      "limitation": "This review does not claim these gates, generated-copy validation, integration, deployment, installation, adoption, or live verification passed."
+    },
+    "description_exactly_matches_3d520fe": true,
+    "prior_reviews": [
+      {
+        "reviewed_revision": "96cb15da82b613764b4ab006100461a191f58511",
+        "reviewed_tree": "29460578226b753bf20371b90e01a153d1daecb4",
+        "base_revision": "3d520fe5ec2ebd845c43e0327ae3257e7b3ef03c",
+        "scope": {
+          "type": "independent_semantic_delta_review",
+          "files": [
+            "skills/selective-intelligence/SKILL.md"
+          ],
+          "boundary": "Final canonical core delta only; previously closed findings remain closed unless invalidated by this delta."
+        },
+        "objections": [],
+        "verdict": "PASS"
+      }
+    ]
+  },
+  "objector_gate_review": {
+    "schema_version": 1,
+    "role": "si-objector",
+    "reviewed_revision": "b7189e02ed2d22361194de897e7463d553e64aae",
+    "reviewed_tree": "e6c3cdc3c35ccfb078ddcf623037a9088475860c",
+    "source_identity": {
+      "gitHead": "b7189e02ed2d22361194de897e7463d553e64aae",
+      "workingTreeDirty": false,
+      "sourceSnapshotSha256": "e21b05976319df119e3fd776619dc4c6905940f42dda586565c8b5221e92bace",
+      "sourceFileCount": 322
+    },
+    "reviewer_current_head_matches": true,
+    "reviewer_current_working_tree_dirty": false,
+    "scope": {
+      "environment": "Local clean worktree /workspace/scratch/0d996fec1bf9/si-verify",
+      "included": [
+        "previously reviewed final source semantics",
+        "local implementation and deterministic safeguards",
+        "local package integrity",
+        "four existing CI-extra checks executed locally"
+      ],
+      "excluded": [
+        "hosted CI at the published PR63 revision",
+        "merge or release approval",
+        "live Muse installation and corrected handoff",
+        "production or cross-client model behavior claims"
+      ]
+    },
+    "verdict": "PASS",
+    "verdict_scope": "Local implementation and package findings are closed by the original passing checks plus the successful targeted release-integrity rerun.",
+    "objections": [],
+    "unresolved_blocking_objections_in_scope": 0,
+    "source_review": {
+      "artifact": "objector-final-delta.json",
+      "verdict": "PASS",
+      "reviewed_revision": "b7189e02ed2d22361194de897e7463d553e64aae",
+      "source_sha256": "54f8c0594f092b53d3f727405727284381c8c099c51cf44b8e93ffe44dfd7c6b"
+    },
+    "dispositions": [
+      {
+        "id": "LOCAL-SOURCE-SEMANTICS",
+        "status": "closed",
+        "basis": "Carry forward the independent semantic PASS on the unchanged final source. No gate evidence invalidates the prior closures.",
+        "evidence": [
+          "objector-final-delta.json",
+          "verification-publish/quality-gate.json"
+        ]
+      },
+      {
+        "id": "LOCAL-IMPLEMENTATION-PROOF",
+        "status": "closed",
+        "closing_condition": "Required local unit, deterministic-control, Council, and behavior-evidence safeguards pass on the reviewed source.",
+        "observed_result": {
+          "unit_tests": 324,
+          "deterministic_controls": 81,
+          "council_safeguards": "pass",
+          "behavior_evidence_safeguards": "pass",
+          "hidden_oracle_exposed": false
+        },
+        "evidence": [
+          "verification-publish/01-stdout.txt",
+          "verification-publish/02-stdout.txt",
+          "verification-publish/03-stdout.txt",
+          "verification-publish/04-stderr.txt",
+          "verification-publish/commands.json"
+        ],
+        "remaining_verification": "Hosted execution is separately named below."
+      },
+      {
+        "id": "LOCAL-CI-EXTRAS",
+        "status": "closed",
+        "closing_condition": "The four existing CI-extra checks pass locally without changing their acceptance conditions.",
+        "observed_result": {
+          "discovery_bridge_tests": 11,
+          "native_pointer_tests": 7,
+          "chatgpt_adapter_status": "pass",
+          "chatgpt_adapter_files": 59,
+          "public_plugin_tests": 4,
+          "all_exit_codes": 0
+        },
+        "evidence": [
+          "verification-publish/ci-extras.json",
+          "verification-publish/discovery_bridge-stderr.txt",
+          "verification-publish/native_pointers-stderr.txt",
+          "verification-publish/chatgpt_adapter-stdout.txt",
+          "verification-publish/public_plugin-stderr.txt"
+        ]
+      },
+      {
+        "id": "LOCAL-RELEASE-INTEGRITY-CLEANUP",
+        "status": "closed_by_targeted_rerun",
+        "original_defect": "The original release-integrity command failed with Errno 39 while cleaning an owned temporary executable-eval directory and reported remaining residue.",
+        "original_full_gate_passed": false,
+        "original_release_exit_code": 1,
+        "closing_condition": "Rerun the failed release-integrity check on unchanged source; require exit 0, local-package ready true, no errors, and no residual entries in its dedicated temporary root.",
+        "observed_result": {
+          "exit_code": 0,
+          "ready": true,
+          "errors": [],
+          "stderr_empty": true,
+          "recorded_tmp_entries": [],
+          "reviewer_observed_tmp_entries": []
+        },
+        "source_binding": "Orchestrator attests no source change between the original command and targeted rerun; reviewer confirmed the same final HEAD and a clean current worktree.",
+        "evidence": [
+          "verification-publish/quality-gate.json",
+          "verification-publish/05-stdout.txt",
+          "verification-publish/05-stderr.txt",
+          "verification-publish/release-integrity-rerun.json",
+          "verification-publish/release-integrity-rerun-stdout.txt",
+          "verification-publish/release-integrity-rerun-stderr.txt"
+        ],
+        "honesty_boundary": "The original failed full-command record remains failed. The observed cleanup failure is retained; the later successful required check closes verification without a source change or test waiver. This is not evidence that the first full command passed."
+      }
+    ],
+    "evidence_integrity": {
+      "all_five_original_check_output_hashes_and_sizes_match_raw_stdout_plus_stderr": true,
+      "all_five_original_exit_codes_match_commands_json": true,
+      "original_checks": [
+        {
+          "name": "deterministic_controls",
+          "passed": true,
+          "exitCode": 0,
+          "outputSha256": "6be73c5871c21b04b4a57d6bcd592e7b0a370add579253f1f2fd384410b628ad",
+          "outputBytes": 5116
+        },
+        {
+          "name": "council_safeguards",
+          "passed": true,
+          "exitCode": 0,
+          "outputSha256": "172a5f94da1d8c6883f1b784b3a837f73a39654082ffe6f8a6cd561330f584d6",
+          "outputBytes": 2590
+        },
+        {
+          "name": "behavior_evidence_safeguards",
+          "passed": true,
+          "exitCode": 0,
+          "outputSha256": "f923e651d13387e2f026621ddf13e5bd04522c1cf49be453eeee1ab445a8d172",
+          "outputBytes": 388
+        },
+        {
+          "name": "unit_tests",
+          "passed": true,
+          "exitCode": 0,
+          "outputSha256": "e8e3a374d37ba992631dc2c2266e595c510706d9934f7edbfc4dc01fc7c50781",
+          "outputBytes": 425
+        },
+        {
+          "name": "release_integrity",
+          "passed": false,
+          "exitCode": 1,
+          "outputSha256": "3f4cee40bb74f5e15be851e95a5d534a7259c4c74a59f6ec32680dab061be6bd",
+          "outputBytes": 699
+        }
+      ],
+      "release_rerun_output_sha256": "e86923151f84c9a8bf1da456aa976da3751276b962507593b10b728296bdb851",
+      "release_rerun_hash_matches_raw_stdout_plus_stderr": true,
+      "release_rerun_temporary_root_observed_empty": true
+    },
+    "remaining_named_verifications": [
+      {
+        "id": "HOSTED-CI-PR63-PUBLISHED-HEAD",
+        "status": "unproved",
+        "claim": "All required hosted repository checks pass for the actual published head of existing draft PR63.",
+        "responsible_role": "Orchestrator / repository integrator",
+        "target_revision": "Record the exact published PR63 head containing unchanged reviewed source b7189e02ed2d22361194de897e7463d553e64aae; if an evidence-only publication commit is added, verify the hosted runs on that actual head.",
+        "target_environment": "Existing repository hosted CI for PR63",
+        "exact_action": "After authorized source and evidence publication, read PR63 head SHA and all required check results; bind each result to that exact SHA and confirm the reviewed source is unchanged.",
+        "expected_result": "Every existing required hosted check passes at the published head; source identity matches the reviewed final source.",
+        "required_state": "Before merge",
+        "blocks_merge_until_passed": true,
+        "why_unavailable_now": "The supplied artifacts are local results; they do not contain hosted check evidence for the final published revision.",
+        "failure_response": "Keep merge blocked. Inspect the specific failure, repair affected source or evidence within authority, and repeat only failed or invalidated proof at the resulting published revision."
+      },
+      {
+        "id": "LIVE-MUSE-INSTALLATION-AND-HANDOFF",
+        "status": "unproved",
+        "claim": "The intended live Muse installation loads the reviewed SI package and completes the corrected resume and Worker handoff.",
+        "responsible_role": "Orchestrator / authorized Muse runtime operator",
+        "target_revision": "Package and installed source identity derived from b7189e02ed2d22361194de897e7463d553e64aae; record the actual package digest and installed revision.",
+        "target_environment": "Intended live Muse client/runtime",
+        "exact_action": "At the authorized installation boundary, verify the loaded package identity and execute the requested corrected resume/Worker handoff; capture the actual checkpoint selection, authority/bindings, and resulting behavior.",
+        "expected_result": "Muse loads the intended source and the corrected handoff succeeds with the original governing intent, authority, and result bindings preserved.",
+        "required_state": "After authorized installation and before claiming live Muse installation, handoff success, or completion of that runtime objective",
+        "why_unavailable_now": "No live Muse installation or handoff evidence was supplied. Local package readiness and safeguard tests do not prove a running client state.",
+        "failure_response": "Keep live claims unproved, preserve the observed failure and state, and repair or recover the affected runtime path within existing authority. Reopen only findings whose closing evidence is specifically invalidated."
+      }
+    ],
+    "delivery_boundary": {
+      "local_package_ready": true,
+      "original_full_command_passed": false,
+      "local_required_checks_satisfied_with_targeted_rerun": true,
+      "hosted_ci_verified": false,
+      "merge_readiness_established": false,
+      "merge_or_release_authority_granted": false,
+      "model_behavior_ready": false,
+      "live_muse_installation_or_handoff_verified": false,
+      "publication_scope": "Existing draft PR63 source/preservation and a single raw evidence artifact only; this verdict authorizes no additional transition."
+    },
+    "next_skill": "si-aligner"
+  },
+  "fresh_context_fixture": {
+    "scope": "Synthetic bounded review packets; each case is independent. Observations are supplied fixture facts, not claims about a deployed system.",
+    "cases": [
+      {
+        "id": "A",
+        "intent": "A retried checkout request creates exactly one order and one charge.",
+        "candidate": "r2",
+        "ledger": [
+          {
+            "id": "F17",
+            "state": "open",
+            "defect": "Retry creates a second order and charge.",
+            "evidence": "r1 duplicate-request test produced two orders and two charges.",
+            "closing_condition": "At the reviewed revision, submitting the same checkout request twice yields one order and one charge."
+          }
+        ],
+        "worker_disposition": "Request closure after adding idempotency enforcement.",
+        "evidence": {
+          "revision": "r2",
+          "test": "submit identical checkout request twice",
+          "observed_orders": 1,
+          "observed_charges": 1,
+          "result": "pass"
+        }
+      },
+      {
+        "id": "B",
+        "intent": "The owner chose blue buttons. Preserve that fixed product decision.",
+        "candidate": "r2",
+        "ledger": [
+          {
+            "id": "F9",
+            "state": "closed_by_objector",
+            "defect": "Mobile button label was clipped.",
+            "closing_condition": "Full label visible at the supported 320px width.",
+            "evidence": "r2 screenshot and layout assertion show the full label at 320px."
+          }
+        ],
+        "delta": "No source changes since r2.",
+        "review_request": "A new reviewer prefers green and wants F9 reopened until the owner approves the new color.",
+        "evidence": "No new defect or invalidation of the closing evidence is supplied."
+      },
+      {
+        "id": "C",
+        "intent": "A retried checkout request creates exactly one order and one charge.",
+        "candidate": "r3",
+        "ledger": [
+          {
+            "id": "F17",
+            "state": "closed_by_objector",
+            "defect": "Retry creates a second order and charge.",
+            "closing_condition": "Two identical requests yield one order and one charge.",
+            "evidence": "r2 duplicate-request test produced one order and one charge."
+          }
+        ],
+        "delta": "r3 replaced the checkout path; the new entry point bypasses the idempotency guard.",
+        "evidence": {
+          "revision": "r3",
+          "test": "submit identical checkout request twice",
+          "observed_orders": 2,
+          "observed_charges": 2,
+          "result": "fail"
+        },
+        "worker_disposition": "Keep F17 closed because it passed in the previous review."
+      },
+      {
+        "id": "D",
+        "intent": "Before merge, the candidate migration must pass the disposable-database rollback check.",
+        "candidate": "m4",
+        "ledger": [
+          {
+            "id": "F21",
+            "state": "open",
+            "defect": "Required rollback verification is missing.",
+            "closing_condition": "Run the migration and rollback on a disposable database at m4; the original schema and row counts must be restored."
+          }
+        ],
+        "worker_disposition": "Database access is unavailable; move the check to deployment and merge now.",
+        "evidence": "No run exists. Governing acceptance explicitly requires the check before merge."
+      },
+      {
+        "id": "E",
+        "intent": "Merge may follow a passing source review. After deployment, the release operator must verify the live health endpoint before declaring the release complete.",
+        "candidate": "s5",
+        "ledger": [],
+        "evidence": "All required source checks at s5 passed. s5 is not deployed and there is no live result.",
+        "worker_disposition": "Source review is ready. Keep a deployment verification for the release operator: deploy s5 to production, GET /health, expect HTTP 200 with version s5; block release completion and restore the prior healthy version if it fails. The endpoint cannot report s5 until deployment."
+      }
+    ]
+  },
+  "fresh_context_result": {
+    "scope": "Synthetic bounded review. Each packet is independent. Supplied observations are fixture facts, not real application, integration, deployment, or Muse evidence.",
+    "role": "si-objector",
+    "cases": [
+      {
+        "case_id": "A",
+        "reviewed_revision": "r2",
+        "reviewed_environment": "Fixture duplicate-request test; runtime environment not specified.",
+        "reviewed_scope": "Whether retrying the identical checkout request produces exactly one order and one charge.",
+        "verdict": "pass",
+        "findings": [
+          {
+            "id": "F17",
+            "severity": "blocking when unresolved",
+            "original_defect": "Retry creates a second order and charge.",
+            "requirement": "A retried checkout request creates exactly one order and one charge.",
+            "exact_place": "Checkout duplicate-request behavior; no source location was supplied.",
+            "original_evidence": "r1 duplicate-request test produced two orders and two charges.",
+            "closing_condition": "At the reviewed revision, submitting the same checkout request twice yields one order and one charge.",
+            "evidence": [
+              "At r2, the supplied test submitted the identical checkout request twice.",
+              "The supplied observation is one order and one charge, with result pass."
+            ],
+            "worker_disposition_assessment": "Accepted: the evidence at the reviewed revision demonstrates the closing condition.",
+            "disposition": "closed_by_objector",
+            "remaining_verification": []
+          }
+        ],
+        "unresolved_blocking_objections": {
+          "count": 0,
+          "ids": []
+        },
+        "required_verifications": [],
+        "next_permissible_state": "Return to si-aligner with this bounded result review cleared and F17 closed. No blocker in this packet prevents merge; this verdict does not assert that merge or any later delivery state has occurred.",
+        "next_skill": "si-aligner"
+      },
+      {
+        "case_id": "B",
+        "reviewed_revision": "r2",
+        "reviewed_environment": "Supported 320px mobile layout represented by the supplied screenshot and layout assertion.",
+        "reviewed_scope": "Whether existing finding F9 should reopen, while preserving the owner's blue-button decision.",
+        "verdict": "pass",
+        "findings": [
+          {
+            "id": "F9",
+            "severity": "blocking when unresolved",
+            "original_defect": "Mobile button label was clipped.",
+            "requirement": "The full button label must be visible at the supported 320px width. Preserve the owner's blue-button decision.",
+            "exact_place": "Mobile button label at 320px; no source location was supplied.",
+            "original_evidence": "The packet supplies the original defect but no original failing artifact.",
+            "closing_condition": "Full label visible at the supported 320px width.",
+            "evidence": [
+              "The existing r2 screenshot and layout assertion show the full label at 320px.",
+              "No source changes occurred after r2.",
+              "No new defect or invalidation of the closing evidence was supplied."
+            ],
+            "review_request_assessment": "Rejected: a new reviewer's preference for green is neither evidence invalidating F9's closure nor authority to change the owner's fixed product decision. Owner approval for a new color is not a condition for closing F9.",
+            "disposition": "remain_closed_by_objector",
+            "remaining_verification": []
+          }
+        ],
+        "unresolved_blocking_objections": {
+          "count": 0,
+          "ids": []
+        },
+        "required_verifications": [],
+        "next_permissible_state": "Return to si-aligner with F9 still closed and the fixed blue-button decision preserved. This bounded review introduces no new merge blocker or color-approval gate.",
+        "next_skill": "si-aligner"
+      },
+      {
+        "case_id": "C",
+        "reviewed_revision": "r3",
+        "reviewed_environment": "Fixture duplicate-request test; runtime environment not specified.",
+        "reviewed_scope": "Checkout retry behavior following replacement of the checkout entry point.",
+        "verdict": "blocked",
+        "findings": [
+          {
+            "id": "F17",
+            "severity": "blocking",
+            "original_defect": "Retry creates a second order and charge.",
+            "requirement": "A retried checkout request creates exactly one order and one charge.",
+            "exact_place": "The replacement checkout entry point at r3 that bypasses the idempotency guard; no source filename or line was supplied.",
+            "original_evidence": "The existing closure cites an r2 duplicate-request test producing one order and one charge.",
+            "closing_condition": "Two identical requests yield one order and one charge at the reviewed candidate revision.",
+            "evidence": [
+              "The supplied r3 delta replaces the checkout path and bypasses the idempotency guard.",
+              "The r3 duplicate-request test produced two orders and two charges, with result fail."
+            ],
+            "closure_invalidation": "The r2 evidence no longer establishes the closing condition for the changed r3 entry point, and the supplied r3 failure directly demonstrates recurrence of the original defect.",
+            "worker_disposition_assessment": "Rejected: the prior pass does not preserve closure against specific invalidating evidence at the current revision.",
+            "disposition": "reopened_by_objector",
+            "smallest_necessary_correction": "Apply idempotency enforcement to the replacement checkout entry point so duplicate requests cannot create a second order or charge.",
+            "remaining_verification": [
+              "C-F17-retry-check"
+            ]
+          }
+        ],
+        "unresolved_blocking_objections": {
+          "count": 1,
+          "ids": [
+            "F17"
+          ]
+        },
+        "required_verifications": [
+          {
+            "id": "C-F17-retry-check",
+            "claim": "The corrected checkout entry point creates one order and one charge for two identical requests.",
+            "responsible_role": "si-worker supplies repair evidence; si-objector evaluates closure.",
+            "target_revision": "The repaired candidate derived from r3; bind the evidence to its exact revision when available.",
+            "target_environment": "The duplicate-request test environment exercising the replacement checkout entry point; its concrete environment identifier is not supplied.",
+            "exact_action": "After correcting the bypass, submit the identical checkout request twice through the replacement entry point and record the resulting order and charge counts.",
+            "expected_result": "Exactly one order and one charge.",
+            "required_state": "Before merge and before F17 can be closed at the repaired revision.",
+            "current_status": "Failed at r3; no repair evidence is supplied.",
+            "unavailable_now_reason": "The only current-candidate observation is the supplied failing r3 run, and there is no corrected candidate in the packet.",
+            "placement_basis": "The checkout acceptance condition must hold for the reviewed candidate; a demonstrated blocker cannot be deferred past merge.",
+            "failure_response": "Keep F17 open, prevent merge, correct the remaining defect, and repeat this bounded verification."
+          }
+        ],
+        "next_permissible_state": "Return to si-aligner for a bounded Worker repair and review of the corrected checkout behavior. Merge is not permissible while F17 is unresolved.",
+        "next_skill": "si-aligner"
+      },
+      {
+        "case_id": "D",
+        "reviewed_revision": "m4",
+        "reviewed_environment": "Required disposable database; access is unavailable and no execution exists.",
+        "reviewed_scope": "The explicitly required migration rollback check before merge.",
+        "verdict": "blocked",
+        "findings": [
+          {
+            "id": "F21",
+            "severity": "blocking required verification",
+            "original_defect": "Required rollback verification is missing.",
+            "requirement": "Before merge, the candidate migration must pass the disposable-database rollback check.",
+            "exact_place": "Candidate migration and rollback at m4 on a disposable database; no source location or database identifier was supplied.",
+            "original_evidence": "No migration-and-rollback run exists.",
+            "closing_condition": "Run the migration and rollback on a disposable database at m4; the original schema and row counts must be restored.",
+            "evidence": [
+              "Database access is unavailable.",
+              "No verification run exists.",
+              "Governing acceptance explicitly requires this check before merge."
+            ],
+            "worker_disposition_assessment": "Rejected: moving the check to deployment contradicts the required pre-merge state. Unavailable access neither proves rollback correctness nor authorizes deferral.",
+            "disposition": "sustained_open",
+            "smallest_necessary_correction": "Obtain access to a disposable database and execute the required rollback verification at m4.",
+            "remaining_verification": [
+              "D-F21-rollback-check"
+            ]
+          }
+        ],
+        "unresolved_blocking_objections": {
+          "count": 1,
+          "ids": [
+            "F21"
+          ]
+        },
+        "required_verifications": [
+          {
+            "id": "D-F21-rollback-check",
+            "claim": "The m4 migration can be rolled back to the original schema and row counts.",
+            "responsible_role": "si-worker performs and records the migration verification; si-objector evaluates closure.",
+            "target_revision": "m4",
+            "target_environment": "A disposable database suitable for the candidate migration; a concrete database identifier is not supplied.",
+            "exact_action": "Record the disposable database's original schema and row counts, apply the m4 migration, run its rollback, and compare the resulting schema and row counts with the recorded baseline.",
+            "expected_result": "The original schema and row counts are restored.",
+            "required_state": "Pre-merge.",
+            "current_status": "Not run; blocking.",
+            "unavailable_now_reason": "The fixture explicitly states that database access is unavailable.",
+            "placement_basis": "Governing acceptance explicitly requires the check before merge, so deployment is not an acceptable replacement state.",
+            "failure_response": "Prevent merge. If the check fails, correct the migration or rollback and rerun at the corrected candidate revision; if access remains unavailable, retain the blocker."
+          }
+        ],
+        "next_permissible_state": "Return to si-aligner with F21 sustained and arrange the required disposable-database check before merge. Merge and deferral of this requirement to deployment are not permissible.",
+        "next_skill": "si-aligner"
+      },
+      {
+        "case_id": "E",
+        "reviewed_revision": "s5",
+        "reviewed_environment": "Source-check environment represented by the supplied passing observations; production deployment has not occurred.",
+        "reviewed_scope": "Readiness to merge following source review, with a separate required production health check after deployment.",
+        "verdict": "pass",
+        "findings": [],
+        "evidence": [
+          "All required source checks at s5 passed.",
+          "s5 is not deployed and no live result exists.",
+          "Acceptance permits merge after a passing source review and requires the release operator's live health check after deployment, before release completion."
+        ],
+        "worker_disposition_assessment": "Accepted: the proposed live verification has an identified responsible role, revision, environment, action, expected result, required state, and failure response. Its placement matches acceptance because the endpoint cannot report the undeployed s5 revision.",
+        "unresolved_blocking_objections": {
+          "count": 0,
+          "ids": []
+        },
+        "required_verifications": [
+          {
+            "id": "E-s5-production-health",
+            "claim": "The deployed production release responds successfully and identifies itself as s5.",
+            "responsible_role": "Release operator.",
+            "target_revision": "s5",
+            "target_environment": "Production.",
+            "exact_action": "Deploy s5 to production, then issue GET /health and inspect the HTTP status and reported version.",
+            "expected_result": "HTTP 200 with version s5.",
+            "required_state": "After deployment and before declaring the release complete.",
+            "current_status": "Pending deployment; not passed.",
+            "unavailable_now_reason": "s5 is not deployed, so the live endpoint cannot report s5.",
+            "placement_basis": "Governing acceptance explicitly permits merge after source review and places the live verification after deployment.",
+            "failure_response": "Block release completion and restore the prior healthy version."
+          }
+        ],
+        "delivery_states_unproved": [
+          "Merged",
+          "Deployed",
+          "Live health verified",
+          "Release complete"
+        ],
+        "next_permissible_state": "Return to si-aligner with source review cleared. Merge may proceed; the release operator may then deploy s5 and perform E-s5-production-health. Release completion remains unavailable until that verification passes.",
+        "next_skill": "si-aligner"
+      }
+    ]
+  },
+  "recovered_manifest_check": {
+    "adapters/chatgpt/metadata/chatgpt-adapter.json": {
+      "blob": "b7919ead128aa0ac2da72bb54b0a7a9d3b67c7e2",
+      "matches_report": true
+    },
+    "adapters/chatgpt/selective-intelligence/SKILL.md": {
+      "blob": "98713c611c5579d2f9bfadee2d26c34dbeb3fdc4",
+      "matches_report": true
+    },
+    "adapters/chatgpt/selective-intelligence/evals/evals.json": {
+      "blob": "26f45a83529ede7d7a4a6f6acbe58ed6e09b4587",
+      "matches_report": true
+    },
+    "adapters/chatgpt/selective-intelligence/scripts/progress_checkpoint.py": {
+      "blob": "6ea963099aacfdf6ead5de8cebc08f988fd04e32",
+      "matches_report": true
+    },
+    "skills/selective-intelligence/SKILL.md": {
+      "blob": "5ed4dfee27adb748bc4c250bc22fb86b6b6c5ef1",
+      "matches_report": true
+    },
+    "skills/selective-intelligence/evals/evals.json": {
+      "blob": "26f45a83529ede7d7a4a6f6acbe58ed6e09b4587",
+      "matches_report": true
+    },
+    "skills/selective-intelligence/metadata/distribution.json": {
+      "blob": "48ddaa3f73c3c4c64ed9f56af0e2abf53040cb5f",
+      "matches_report": true
+    }
+  }
+}

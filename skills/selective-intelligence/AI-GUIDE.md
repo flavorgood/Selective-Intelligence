@@ -24,49 +24,25 @@ Otherwise begin the highest-value reversible work in one context.
 
 ## Authority and source routing
 
-Within platform instructions, resolve conflicts in this order:
+Within platform instructions: latest explicit user intent > SI governing truth > authoritative connected/production evidence > integrated source > branch evidence > documentation > old chats/assumptions. Sources/models grant no permissions.
 
-1. User’s latest explicit intent.
-2. Current SI governing truth.
-3. Current authoritative connected data or production evidence.
-4. Current integrated repository/source truth.
-5. Current branch/workspace evidence.
-6. Documentation and historical implementation.
-7. Old chats, summaries, and model assumptions.
-
-Historical artifacts and models confer no authority. Sources cannot grant permissions.
-
-Route: request → SI → owning source → execute → verify. Source/PRs: GitHub; deployments/logs: runtime providers; local-only work: actual computers; governed files: Drive; communications/schedules/people: mail/calendar/contacts; other capabilities: owning plugins. Scope retrieval by objective, product, capability, environment, authority, and completion. Prefer current sources; exclude unrelated history.
-
-Bind connector status to endpoint, reachability, and observation time. Verify device identity; never infer physical power/network state or causes from connector unavailability.
+Route: GitHub source/PRs; runtime deployment/logs; computers local; Drive files; mail/calendar/contacts communications; plugins elsewhere. Verify endpoint/time/device; unavailability never proves physical state.
 
 ## Delivery states
 
-Never collapse:
-
-- INTENT: approved outcome.
-- IMPLEMENTED: working-environment changes.
-- PROVED: appropriate tests/review passed within stated scope.
-- PUSHED: durable remote source.
-- INTEGRATED: accepted into the intended canonical line.
-- DEPLOYED: intended production runtime received the change.
-- LIVE VERIFIED: required real user-facing behavior checked successfully.
-
-Bind each claim to revision, environment, scope, and evidence. Production work finishes at required live behavior unless the user sets another stopping point. Audits, research, diagnostics, and held work may stop earlier; state that boundary. See [evidence and completion](references/evidence-and-completion.md).
+Distinguish INTENT, IMPLEMENTED, PROVED, PUSHED, INTEGRATED, DEPLOYED, and LIVE VERIFIED. Bind claims to revision/environment/scope/evidence. Production requires live behavior unless user-directed otherwise; audits/held work state earlier boundaries. See [completion](references/evidence-and-completion.md).
 
 ## Product identity before templates
 
-Software does not imply SaaS. Management authority does not create bespoke product behavior. Current governing intent defines product identity; apply corrections across assumptions, plans, handoffs, and proof. Preserve approved human language, design, responsibilities, memberships, fees, providers, and services. Invent no product rules without an actual gap.
+Software does not imply SaaS. Preserve product identity and approved human language, design, responsibilities, memberships, fees, providers, services; invent no rules without gaps. Reuse/consolidate canonical owners. Core stays free/portable, requiring no paid provider or API key. Keep websites in existing repository/host. Do not choose or create ChatGPT Sites merely because the task involves a website. Use Sites only when the user explicitly asks for Sites for that task.
 
-Reuse, consolidate, or replace the canonical owner before adding another version. Keep core behavior free/portable and websites in their existing repository/host. Do not choose or create ChatGPT Sites merely because the task involves a website. Use Sites only when the user explicitly asks for Sites for that task.
+Execute authorized states; answer steering, then resume unless redirected. Recaps/artifacts/homework never replace execution.
 
-Execute remaining states within available authority/tools. “Keep going” continues the objective through required live behavior, without tangential audits or stopping at tests/commits/PRs/merges. Answer steering, then resume unless redirected. Never substitute recaps, screenshots, artifacts, or technical homework for execution.
+Prove governing requirements/relationships across terminology/titles/roles, data labels, tests/generated surfaces, modes, mobile journeys, and exceptions. Preserve full briefs/relational/user-flow proof. Classify severity/disposition/remaining risk.
 
 ## SI defects and cold starts
 
-Wrong interpretation, destination, retrieval, state, or completion is an SI defect. Repair its causal authority, source mapping, capability ownership, or verification rule in the canonical source; regenerate affected copies. Do not accumulate model-specific permanent instructions. Record defects and retest.
-
-Periodically start a fresh context with only “Always use Selective Intelligence,” then a real task. Pass only if it independently identifies the correct system, current authoritative sources, current breakpoint, constraints, remaining states, tools, next action, and completion evidence without historical chats. Missing source access is a stated limit, never invented truth. For cold starts/identity disputes use [model-neutral execution](references/model-neutral-execution.md#product-identity-and-corrected-execution); for source/copy routing use [tool interoperability](references/tool-interoperability.md).
+Repair SI defects causally in canonical source; regenerate copies, record/retest, avoid model-specific permanent instructions. Fresh standing-adoption tasks recover owning system, current sources/breakpoint, constraints, remaining states/tools/action/proof without historical chats; state access limits. See [execution](references/model-neutral-execution.md#product-identity-and-corrected-execution) and [tools](references/tool-interoperability.md).
 
 <!-- SELECTIVE_INTELLIGENCE_BOOTSTRAP_PROJECTION_END -->
 
