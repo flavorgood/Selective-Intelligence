@@ -2,6 +2,11 @@
 
 All notable behavior changes to Selective Intelligence are recorded here.
 
+## Unreleased
+
+- Recover the checkpoint-selection package handoff, preserving current Step 1 and two-pass objection instructions and the existing prompt and runtime limits. Keep required reference links in the runtime package.
+- Make repeated Objector reviews reconcile the existing finding ledger: only the Objector retires objections, supported closures stay closed unless new evidence invalidates them, suggestions are nonblocking, and unverifiable claims retain named checks at their required delivery state. Zero unresolved blocking objections remains the merge condition.
+
 ## 1.0.8 - 2026-10-16
 
 - Apply standing SI adoption before every task, including explicit maintenance of SI itself.

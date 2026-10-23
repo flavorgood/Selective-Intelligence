@@ -14,6 +14,10 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 DOCS = ROOT / "docs"
+PUBLIC_SOURCE_URL = (
+    "https://github.com/flavorgood/Selective-Intelligence/blob/main/"
+    "skills/selective-intelligence/"
+)
 TRIGGER = "Selective Intelligence"
 APPROVAL = "Use Selective Intelligence for this?"
 PLUGIN_DIRECTORY_URL = (
@@ -125,10 +129,23 @@ class DiscoveryBridgeTests(unittest.TestCase):
         self.assertEqual(structured["about"]["@type"], "DefinedTerm")
         self.assertIn("https://infotradescout.github.io/Selective-Intelligence/sitemap.xml", (DOCS / "robots.txt").read_text(encoding="utf-8"))
         self.assertIn("Selective Intelligence", (DOCS / "llms.txt").read_text(encoding="utf-8"))
-        self.assertEqual(
-            (DOCS / "SKILL.md").read_text(encoding="utf-8"),
-            (ROOT / "skills" / "selective-intelligence" / "SKILL.md").read_text(encoding="utf-8"),
-        )
+        for name in ("SKILL.md", "AI-GUIDE.md"):
+            source = (ROOT / "skills" / "selective-intelligence" / name).read_text(encoding="utf-8")
+            public = (DOCS / name).read_text(encoding="utf-8")
+            source_paths = re.findall(r"\]\(((?:references|subskills)/[^#)]+)(?:#[^)]+)?\)", source)
+            self.assertTrue(source_paths, name)
+            for source_path in source_paths:
+                self.assertTrue((ROOT / "skills" / "selective-intelligence" / source_path).is_file())
+            expected = (source
+                        .replace("](references/", f"]({PUBLIC_SOURCE_URL}references/")
+                        .replace("](subskills/", f"]({PUBLIC_SOURCE_URL}subskills/"))
+            self.assertEqual(public, expected)
+            self.assertNotIn("](references/", public)
+            self.assertNotIn("](subskills/", public)
+            self.assertIn(
+                f"]({PUBLIC_SOURCE_URL}references/model-neutral-execution.md#product-identity-and-corrected-execution)",
+                public,
+            )
         citation = (ROOT / "CITATION.cff").read_text(encoding="utf-8")
         self.assertRegex(citation, rf"(?m)^version: {re.escape(self.manifest['version'])}$")
         self.assertEqual(citation, (DOCS / "CITATION.cff").read_text(encoding="utf-8"))

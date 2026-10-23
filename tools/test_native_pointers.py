@@ -62,7 +62,11 @@ class NativePointerTests(unittest.TestCase):
         skill = (skill_root / "SKILL.md").read_text(encoding="utf-8")
         guide = (skill_root / "AI-GUIDE.md").read_text(encoding="utf-8")
         import re
-        for title in ("Authority and source routing", "Delivery states", "Product identity before templates", "SI defects and cold starts"):
+        for title in (
+            "Authority and source routing", "Delivery states", "Product identity before templates",
+            "Step 1 - understand actual intent", "Step 2 - ask questions to verify intent",
+            "SI defects and cold starts",
+        ):
             section = re.search(rf"^## {re.escape(title)}\n.*?(?=^## |\Z)", skill, re.M | re.S)
             self.assertIsNotNone(section)
             self.assertIn(section.group().strip(), guide)

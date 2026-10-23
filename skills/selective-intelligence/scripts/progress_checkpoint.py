@@ -356,30 +356,72 @@ def save_checkpoint(
     return operation
 
 
+def _checkpoint_created_at(record: dict[str, Any]) -> datetime:
+    value = record.get("createdAt")
+    try:
+        if not isinstance(value, str):
+            raise ValueError("timestamp must be a string")
+        created_at = datetime.fromisoformat(value.replace("Z", "+00:00"))
+        if created_at.tzinfo is None or created_at.utcoffset() is None:
+            raise ValueError("timestamp must include a timezone")
+        return created_at.astimezone(UTC)
+    except (ValueError, OverflowError) as exc:
+        raise ProgressCheckpointError(
+            "checkpoint time cannot be ordered; reconcile saved records before resuming"
+        ) from exc
+
+
 def checkpoint_status(root: Path) -> dict[str, Any]:
     root = root.resolve()
     repo_root = _git_root(root)
     project_root = repo_root or root
     tracked = project_root / ".selective-intelligence/progress/latest.json"
     private = _private_root(project_root, "progress") / "latest.json"
-    latest = tracked if tracked.is_file() else private
+    branch = _git_value(project_root, "rev-parse", "--abbrev-ref", "HEAD") if repo_root else None
+    head = _git_value(project_root, "rev-parse", "HEAD") if repo_root else None
+    # Non-Git projects use the same path for both locations. Do not read it twice.
+    locations = [("tracked", tracked), ("private", private)] if repo_root else [("project", tracked)]
+    candidates = []
+    for source, path in locations:
+        if path.is_symlink():
+            raise ProgressCheckpointError("checkpoint must not be a symlink")
+        if not path.exists():
+            continue
+        if not path.is_file():
+            raise ProgressCheckpointError("checkpoint location is not a file")
+        record = _read_json(path, PROGRESS_SCHEMA)
+        if not isinstance(record.get("checkpointId"), str) or not record["checkpointId"]:
+            raise ProgressCheckpointError("checkpoint identity is missing; reconcile before resuming")
+        candidates.append((source, record, _checkpoint_created_at(record)))
+
+    selected = candidates[0] if candidates else None
+    if len(candidates) == 2:
+        first, second = candidates
+        if first[1] != second[1]:
+            if first[1]["checkpointId"] == second[1]["checkpointId"] or first[2] == second[2]:
+                raise ProgressCheckpointError(
+                    "checkpoint candidates conflict; reconcile both records before resuming"
+                )
+            selected = max(candidates, key=lambda candidate: candidate[2])
+        # Identical records prefer the tracked copy without discarding either.
+    if selected and selected[0] == "private":
+        saved_repo = selected[1].get("repository")
+        if not isinstance(saved_repo, dict) or saved_repo.get("branch") != branch or branch == "HEAD":
+            raise ProgressCheckpointError(
+                "private checkpoint does not match the current branch; reconcile before resuming"
+            )
     return {
         "schemaVersion": "si.progress-checkpoint-status.v1",
         "projectRoot": str(project_root),
-        "latestCheckpoint": (
-            _read_json(latest, PROGRESS_SCHEMA) if latest.is_file() else None
-        ),
-        "currentBranch": (
-            _git_value(project_root, "rev-parse", "--abbrev-ref", "HEAD")
-            if repo_root
-            else None
-        ),
-        "currentHead": (
-            _git_value(project_root, "rev-parse", "HEAD") if repo_root else None
-        ),
+        "latestCheckpoint": selected[1] if selected else None,
+        "checkpointSource": selected[0] if selected else None,
+        # Selection orders saved progress only; it does not verify PRs, a running
+        # installation, current file contents, delivery, or permission to act.
+        "checkpointExternalStateVerified": False,
+        "currentBranch": branch,
+        "currentHead": head,
         "workingTree": _git_status(project_root) if repo_root else [],
     }
-
 
 def _usage_path(root: Path) -> Path:
     root = root.resolve()
