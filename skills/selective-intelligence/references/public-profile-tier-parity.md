@@ -26,6 +26,12 @@ Every eligible public profile should receive the same baseline treatment where t
 
 Do not treat a premium visual template as permission for a stronger canonical/indexing/search identity than a default template. A premium profile may look richer; a default public profile must still look intentional, complete, trustworthy, and usable.
 
+## Default and custom are different acceptance contracts
+
+Determine whether the requested artifact is the platform's default public profile, an owner-approved custom profile, or part of a named trade ecosystem before choosing its layout and proof. Default/free describes a platform baseline, not a lower quality bar. Every eligible public profile inherits the tier-neutral discovery and core-quality baseline above.
+
+A custom profile additionally carries its approved reference, layout, real identity and content, interactions, and complete intended user journey. A generic profile can meet the common baseline yet fail the custom request. A trade-specific ecosystem may reuse profile infrastructure, but its own actors, services, relationships, and connected workflows determine acceptance; do not merge products with similar names or borrow another product's decisions. Compare the rendered artifact and actual workflow with approved evidence. If a reference cannot be obtained, preserve known requirements and mark visual fidelity unproved rather than inventing a match or treating the default template as approved. Essential custom behavior belongs in the first useful deliverable, not an unspecified polish phase.
+
 ## Non-public status must be explainable
 
 A public-capable profile that is not public must expose a specific reason to its owner or operator. Valid reasons can include:
@@ -56,3 +62,4 @@ When auditing or changing public profiles:
 4. Inspect every non-public decision path and map it to a concrete owner-visible reason.
 5. Treat unexplained non-public state or paid-tier discovery advantage as product drift.
 6. Verify with real rendered/public responses where available; source contracts alone are not live acceptance.
+7. For custom work, test both the shared public baseline and the distinct approved layout, content, actions, and end-to-end journey; passing the baseline alone does not establish bespoke acceptance.

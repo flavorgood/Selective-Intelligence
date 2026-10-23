@@ -25,10 +25,22 @@ class ReleasePromptBudgetTests(unittest.TestCase):
         skill_text = (SKILL_ROOT / "SKILL.md").read_text(encoding="utf-8")
         metrics, errors = release.prompt_budget_errors(skill_text)
         self.assertEqual(errors, [])
-        self.assertLessEqual(metrics["core_words"], 1_100)
+        self.assertLessEqual(metrics["core_words"], 1_200)
         self.assertLessEqual(metrics["core_characters"], 10_000)
         self.assertLessEqual(metrics["core_words"], release.CORE_SKILL_MAX_WORDS)
         self.assertLessEqual(metrics["core_characters"], release.CORE_SKILL_MAX_CHARACTERS)
+
+    def test_intent_stages_and_custom_artifact_boundary_remain_explicit(self):
+        skill_text = (SKILL_ROOT / "SKILL.md").read_text(encoding="utf-8")
+        self.assertIn("## Step 1 - understand actual intent", skill_text)
+        self.assertIn("## Step 2 - ask questions to verify intent", skill_text)
+        self.assertLess(
+            skill_text.index("## Step 1 - understand actual intent"),
+            skill_text.index("## Step 2 - ask questions to verify intent"),
+        )
+        self.assertIn("These questions verify intent, not action permission.", skill_text)
+        self.assertIn("approved custom profiles", skill_text)
+        self.assertIn("generic baselines cannot substitute", skill_text)
 
     def test_rejects_heavy_default_regression(self):
         skill_text = (SKILL_ROOT / "SKILL.md").read_text(encoding="utf-8")

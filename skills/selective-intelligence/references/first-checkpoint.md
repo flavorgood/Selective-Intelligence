@@ -4,7 +4,7 @@ Selective Intelligence uses two different checkpoint types. Confusing them creat
 
 ## 1. Intent and authority checkpoint
 
-This checkpoint prevents expensive drift. It is the default before every edit: step 1 is understanding and verifying understanding of intent, and every single fault or error means step 1 failed. The headed lock below is how that verification is confirmed with the person when one of the conditions in the next section applies.
+This checkpoint prevents expensive drift. Step 1 reconstructs actual intent from the person's words, corrections, and approved context. Step 2 asks targeted questions only where meaning remains materially unresolved after prior answers and available evidence are checked. Those questions verify intent; they do not request permission to act. The headed lock below is a separate action-approval checkpoint that applies only when one of the conditions in the next section fires. Routine authorized edits need no new approval.
 
 ### When it fires
 

@@ -19,7 +19,11 @@ def outputs() -> dict[Path, str]:
     guide_path = skill_root / "AI-GUIDE.md"
     guide = guide_path.read_text(encoding="utf-8")
     sections = []
-    for title in ("Authority and source routing", "Delivery states", "Product identity before templates", "SI defects and cold starts"):
+    for title in (
+        "Authority and source routing", "Delivery states", "Product identity before templates",
+        "Step 1 - understand actual intent", "Step 2 - ask questions to verify intent",
+        "SI defects and cold starts",
+    ):
         match = re.search(rf"^## {re.escape(title)}\n.*?(?=^## |\Z)", skill, re.M | re.S)
         if match is None:
             raise ValueError(f"canonical bootstrap section is missing: {title}")

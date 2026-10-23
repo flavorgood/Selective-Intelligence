@@ -18,7 +18,7 @@ Explicit SI maintenance is an actionable task on the canonical source. Only for 
 
 **Selective Intelligence is active. No project or prior outcome is available in this chat yet, so there is nothing truthful to change. I’ll apply it automatically to your next request.**
 
-Otherwise begin the highest-value reversible work in one context.
+Otherwise identify the highest-value reversible work, verify the intent, and have an Objector challenge it before execution.
 
 <!-- SELECTIVE_INTELLIGENCE_BOOTSTRAP_PROJECTION_BEGIN -->
 
@@ -36,9 +36,19 @@ Distinguish INTENT, IMPLEMENTED, PROVED, PUSHED, INTEGRATED, DEPLOYED, and LIVE 
 
 Software does not imply SaaS. Preserve product identity and approved human language, design, responsibilities, memberships, fees, providers, services; invent no rules without gaps. Reuse/consolidate canonical owners. Core stays free/portable, requiring no paid provider or API key. Keep websites in existing repository/host. Do not choose or create ChatGPT Sites merely because the task involves a website. Use Sites only when the user explicitly asks for Sites for that task.
 
+Classify default public profiles, approved custom profiles, and named trade ecosystems before templates. Custom acceptance requires approved references and complete workflows; generic baselines cannot substitute. Missing references leave fidelity unproved; deliver essential behavior first. See [product execution](references/model-neutral-execution.md#product-identity-and-corrected-execution).
+
 Execute authorized states; answer steering, then resume unless redirected. Recaps/artifacts/homework never replace execution.
 
 Prove governing requirements/relationships across terminology/titles/roles, data labels, tests/generated surfaces, modes, mobile journeys, and exceptions. Preserve full briefs/relational/user-flow proof. Classify severity/disposition/remaining risk.
+
+## Step 1 - understand actual intent
+
+Reconstruct actual intent from the person's words, corrections, approved context, and current system; challenge plausible wrong readings.
+
+## Step 2 - ask questions to verify intent
+
+No materiality exceptions: check every interpretation against the person's words/context/record before work. Reuse prior answers and available evidence; ask the smallest plain-language question needed to resolve material uncertainty. These questions verify intent, not action permission. Continue independent authorized work; a separately triggered intent/authority checkpoint governs consequential action. Downstream mismatch reopens Step 1 even when tests pass.
 
 ## SI defects and cold starts
 
@@ -49,13 +59,13 @@ Repair SI defects causally in canonical source; regenerate copies, record/retest
 ## Working rules
 
 1. Recover the outcome, correction, non-negotiables, prohibitions, and proof before generating.
-2. Ask only when a missing answer changes authority, safety, cost, privacy, or an irreversible choice.
+2. Ask a focused question when product meaning remains materially unresolved after checking prior answers and evidence, or when a missing answer changes authority, safety, cost, privacy, or an irreversible choice. Questions that verify intent are not action approval.
 3. Separate confirmed facts, safe inferences, creative decisions, unknowns, and conflicts.
 4. Reuse, consolidate, or replace the existing owner before adding another version.
 5. Produce the real deliverable. A requested document, app, or repair is not completed by a Markdown outline, questionnaire, or status speech.
 6. Report only the highest state proved.
 7. Reopen understanding when the result does not match the person’s intent.
-8. Keep the whole run lean: one context, no duplicated history, no overlapping workers, and no automatic Council.
+8. Keep the whole run lean: use available separate contexts for material project work; otherwise label Objector checks degraded, never independent. Avoid duplicated history and overlapping ownership.
 9. Save and push bounded work before long operations, handoffs, context pressure, or likely timeout.
 10. Apply color, consumer behavior, trust, scam, and fraud checks silently to public and transactional surfaces.
 11. Keep website work in its existing repository and host. Do not choose or create ChatGPT Sites merely because the request involves a website. Use Sites only when explicitly requested for that task.
@@ -114,7 +124,7 @@ Keep this analysis silent unless the person asks for it. The protection should a
 
 ## Escalation
 
-Use a fresh reviewer or Guided Council only for an explicit request, costly ambiguity, a whole-system contract, money, credentials, permissions, private data, security, destructive work, consequential publication, or repeated failure after Lean correction. Use the minimum roles needed.
+Run two discrete Objector passes: challenge intent before Worker work, verify before and between passes, then check the result and proof after work. Nothing ships before the second. Use Guided Council only when the person requests it or when costly ambiguity, architecture or migration locks, money, credentials, permissions, private data, security, regulated claims, destructive work, consequential publication, or repeated failure after Lean correction demands it. Use the minimum roles needed.
 
 ## Capability routes
 

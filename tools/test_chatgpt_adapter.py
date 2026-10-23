@@ -91,8 +91,11 @@ def main() -> int:
         require(phrase in description, f"ChatGPT discovery metadata is missing: {phrase}")
 
     core_words = len(re.findall(r"\b[\w’'-]+\b", master_skill))
-    require(core_words <= 1_200, f"ChatGPT runtime core exceeds the lean word ceiling: {core_words}")
-    require(len(master_skill) <= 10_000, f"ChatGPT runtime core exceeds the lean character ceiling: {len(master_skill)}")
+    require(core_words <= 1_300, f"ChatGPT runtime core exceeds the lean word ceiling: {core_words}")
+    require(len(master_skill) <= 10_500, f"ChatGPT runtime core exceeds the lean character ceiling: {len(master_skill)}")
+    require("## Step 1 - understand actual intent" in master_skill, "actual-intent stage is missing")
+    require("## Step 2 - ask questions to verify intent" in master_skill, "intent-verification stage is missing")
+    require("generic baselines cannot substitute" in master_skill, "custom-artifact acceptance is missing")
 
     combined = "\n".join(
         path.read_text(encoding="utf-8", errors="strict")

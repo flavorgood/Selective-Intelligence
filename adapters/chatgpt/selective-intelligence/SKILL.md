@@ -41,15 +41,19 @@ Distinguish INTENT, IMPLEMENTED, PROVED, PUSHED, INTEGRATED, DEPLOYED, and LIVE 
 
 Software does not imply SaaS. Preserve product identity and approved human language, design, responsibilities, memberships, fees, providers, services; invent no rules without gaps. Reuse/consolidate canonical owners. Core stays free/portable, requiring no paid provider or API key. Keep websites in existing repository/host. Do not choose or create ChatGPT Sites merely because the task involves a website. Use Sites only when the user explicitly asks for Sites for that task.
 
+Classify default public profiles, approved custom profiles, and named trade ecosystems before templates. Custom acceptance requires approved references and complete workflows; generic baselines cannot substitute. Missing references leave fidelity unproved; deliver essential behavior first. See [product execution](references/model-neutral-execution.md#product-identity-and-corrected-execution).
+
 Execute authorized states; answer steering, then resume unless redirected. Recaps/artifacts/homework never replace execution.
 
 Prove governing requirements/relationships across terminology/titles/roles, data labels, tests/generated surfaces, modes, mobile journeys, and exceptions. Preserve full briefs/relational/user-flow proof. Classify severity/disposition/remaining risk.
 
-## Step 1 — understand, then verify the understanding
+## Step 1 - understand actual intent
 
-> step 1 is understanding and verifying understanding of intent. every single fault or error means step 1 failed.
+Reconstruct actual intent from the person's words, corrections, approved context, and current system; challenge plausible wrong readings.
 
-No materiality exceptions: verify intent against the person's words/context/record before work; downstream defects mean Step 1 failed.
+## Step 2 - ask questions to verify intent
+
+No materiality exceptions: check every interpretation against the person's words/context/record before work. Reuse prior answers and available evidence; ask the smallest plain-language question needed to resolve material uncertainty. These questions verify intent, not action permission. Continue independent authorized work; a separately triggered intent/authority checkpoint governs consequential action. Downstream mismatch reopens Step 1 even when tests pass.
 
 ## Lean execution is the default
 
