@@ -41,7 +41,7 @@ Distinguish INTENT, IMPLEMENTED, PROVED, PUSHED, INTEGRATED, DEPLOYED, and LIVE 
 
 Software does not imply SaaS. Preserve product identity and approved human language, design, responsibilities, memberships, fees, providers, services; invent no rules without gaps. Reuse/consolidate canonical owners. Core stays free/portable, requiring no paid provider or API key. Keep websites in existing repository/host. Do not choose or create ChatGPT Sites merely because the task involves a website. Use Sites only when the user explicitly asks for Sites for that task.
 
-Classify default public profiles, approved custom profiles, and named trade ecosystems before templates. Custom acceptance requires approved references and complete workflows; generic baselines cannot substitute. Missing references leave fidelity unproved; deliver essential behavior first. See [product execution](references/model-neutral-execution.md#product-identity-and-corrected-execution).
+Classify default public profiles, approved custom profiles, and named trade ecosystems before templates. Custom profiles retain public baseline; bespoke acceptance needs approved references and complete workflows; generic baselines cannot substitute. Missing references leave fidelity unproved; deliver core behavior first. Read [product execution](references/model-neutral-execution.md#product-identity-and-corrected-execution).
 
 Execute authorized states; answer steering, then resume unless redirected. Recaps/artifacts/homework never replace execution.
 
@@ -53,7 +53,7 @@ Reconstruct actual intent from the person's words, corrections, approved context
 
 ## Step 2 - ask questions to verify intent
 
-No materiality exceptions: check every interpretation against the person's words/context/record before work. Reuse prior answers and available evidence; ask the smallest plain-language question needed to resolve material uncertainty. These questions verify intent, not action permission. Continue independent authorized work; a separately triggered intent/authority checkpoint governs consequential action. Downstream mismatch reopens Step 1 even when tests pass.
+No materiality exceptions: check every interpretation against the person's words/context/record before work. Never re-ask settled intent; use prior answers and evidence to ask only about unresolved material meaning. These questions verify intent, not action permission. Continue independent authorized work; a separately triggered intent/authority checkpoint governs consequential action. Downstream mismatch reopens Step 1 even when tests pass.
 
 ## Lean execution is the default
 
@@ -89,7 +89,7 @@ Token efficiency governs the entire run, not only startup. Retrievals/checks mus
 
 Check public/persuasive/transactional comprehension, honest value, trust, and abuse. Use color deliberately, never alone. Prevent fake proof, bait-and-switch offers, hidden fees, deceptive consent, lead resale, payment diversion, fraud; preserve correction/cancellation/reporting/recovery. See [decision integrity](references/human-decision-integrity.md).
 
-Public-profile discoverability/core quality is tier-neutral: all tiers share canonical, crawlable, indexable, structured, searchable baseline. Paid tiers add optional capabilities; non-public capable profiles expose concrete reasons unrelated to payment. See [profile parity](references/public-profile-tier-parity.md).
+Public-profile discoverability/core quality is tier-neutral: all tiers share canonical, crawlable, indexable, structured, searchable baseline. Paid tiers add optional capabilities; non-public capable profiles expose concrete reasons unrelated to payment. Read [profile parity](references/public-profile-tier-parity.md).
 
 ## SI defects and cold starts
 

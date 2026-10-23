@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import sys
 import unittest
 from pathlib import Path
@@ -40,7 +41,30 @@ class ReleasePromptBudgetTests(unittest.TestCase):
         )
         self.assertIn("These questions verify intent, not action permission.", skill_text)
         self.assertIn("approved custom profiles", skill_text)
+        self.assertIn("Custom profiles retain public baseline", skill_text)
         self.assertIn("generic baselines cannot substitute", skill_text)
+        self.assertIn("Never re-ask settled intent", skill_text)
+        self.assertIn("Read [product execution]", skill_text)
+        self.assertIn("Read [profile parity]", skill_text)
+
+        execution = (SKILL_ROOT / "references" / "model-neutral-execution.md").read_text(encoding="utf-8")
+        for phrase in (
+            "each actor's entry, route, action, state transition, failure, and recovery",
+            "each distinct ecosystem needs its own authoritative identity and workflow evidence",
+            "its own approved visual reference when one exists",
+            "continue independently supported work without inventing fidelity",
+        ):
+            self.assertIn(phrase, execution)
+
+    def test_available_and_unavailable_custom_references_have_separate_behavior_cases(self):
+        cases = json.loads((SKILL_ROOT / "evals" / "behavior-cases.json").read_text(encoding="utf-8"))["cases"]
+        by_id = {case["id"]: case for case in cases}
+        available = by_id["intent-concrete-connect-custom-first-deliverable"]
+        unavailable = by_id["intent-custom-reference-unavailable"]
+        self.assertIn("not supplied in this synthetic fixture", available["worker_prompt"])
+        self.assertNotIn("becomes inaccessible", " ".join(item["statement"] for item in available["required_invariants"]))
+        self.assertIn("linked visual reference is unavailable", unavailable["worker_prompt"])
+        self.assertIn("visual fidelity", " ".join(item["statement"] for item in unavailable["required_invariants"]))
 
     def test_rejects_heavy_default_regression(self):
         skill_text = (SKILL_ROOT / "SKILL.md").read_text(encoding="utf-8")

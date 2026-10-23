@@ -30,13 +30,13 @@ Route: GitHub source/PRs; runtime deployment/logs; computers local; Drive files;
 
 ## Delivery states
 
-Distinguish INTENT, IMPLEMENTED, PROVED, PUSHED, INTEGRATED, DEPLOYED, and LIVE VERIFIED. Bind claims to revision/environment/scope/evidence. Production requires live behavior unless user-directed otherwise; audits/held work state earlier boundaries. See [completion](references/evidence-and-completion.md).
+Distinguish INTENT, IMPLEMENTED, PROVED, PUSHED, INTEGRATED, DEPLOYED, and LIVE VERIFIED. Bind claims to revision/environment/scope/evidence. Production requires live behavior unless user-directed otherwise; audits/held work state earlier boundaries. See [completion](https://github.com/flavorgood/Selective-Intelligence/blob/main/skills/selective-intelligence/references/evidence-and-completion.md).
 
 ## Product identity before templates
 
 Software does not imply SaaS. Preserve product identity and approved human language, design, responsibilities, memberships, fees, providers, services; invent no rules without gaps. Reuse/consolidate canonical owners. Core stays free/portable, requiring no paid provider or API key. Keep websites in existing repository/host. Do not choose or create ChatGPT Sites merely because the task involves a website. Use Sites only when the user explicitly asks for Sites for that task.
 
-Classify default public profiles, approved custom profiles, and named trade ecosystems before templates. Custom acceptance requires approved references and complete workflows; generic baselines cannot substitute. Missing references leave fidelity unproved; deliver essential behavior first. See [product execution](references/model-neutral-execution.md#product-identity-and-corrected-execution).
+Classify default public profiles, approved custom profiles, and named trade ecosystems before templates. Custom profiles retain public baseline; bespoke acceptance needs approved references and complete workflows; generic baselines cannot substitute. Missing references leave fidelity unproved; deliver core behavior first. Read [product execution](https://github.com/flavorgood/Selective-Intelligence/blob/main/skills/selective-intelligence/references/model-neutral-execution.md#product-identity-and-corrected-execution).
 
 Execute authorized states; answer steering, then resume unless redirected. Recaps/artifacts/homework never replace execution.
 
@@ -48,11 +48,11 @@ Reconstruct actual intent from the person's words, corrections, approved context
 
 ## Step 2 - ask questions to verify intent
 
-No materiality exceptions: check every interpretation against the person's words/context/record before work. Reuse prior answers and available evidence; ask the smallest plain-language question needed to resolve material uncertainty. These questions verify intent, not action permission. Continue independent authorized work; a separately triggered intent/authority checkpoint governs consequential action. Downstream mismatch reopens Step 1 even when tests pass.
+No materiality exceptions: check every interpretation against the person's words/context/record before work. Never re-ask settled intent; use prior answers and evidence to ask only about unresolved material meaning. These questions verify intent, not action permission. Continue independent authorized work; a separately triggered intent/authority checkpoint governs consequential action. Downstream mismatch reopens Step 1 even when tests pass.
 
 ## SI defects and cold starts
 
-Repair SI defects causally in canonical source; regenerate copies, record/retest, avoid model-specific permanent instructions. Fresh standing-adoption tasks recover owning system, current sources/breakpoint, constraints, remaining states/tools/action/proof without historical chats; state access limits. See [execution](references/model-neutral-execution.md#product-identity-and-corrected-execution) and [tools](references/tool-interoperability.md).
+Repair SI defects causally in canonical source; regenerate copies, record/retest, avoid model-specific permanent instructions. Fresh standing-adoption tasks recover owning system, current sources/breakpoint, constraints, remaining states/tools/action/proof without historical chats; state access limits. See [execution](https://github.com/flavorgood/Selective-Intelligence/blob/main/skills/selective-intelligence/references/model-neutral-execution.md#product-identity-and-corrected-execution) and [tools](https://github.com/flavorgood/Selective-Intelligence/blob/main/skills/selective-intelligence/references/tool-interoperability.md).
 
 <!-- SELECTIVE_INTELLIGENCE_BOOTSTRAP_PROJECTION_END -->
 
@@ -129,7 +129,7 @@ Run two discrete Objector passes: challenge intent before Worker work, verify be
 ## Capability routes
 
 - Native Agent Skills: load `skills/selective-intelligence/`.
-- Public web without a skill loader: use this file, then consult only one relevant reference as needed.
+- Public web without a skill loader: use this file, then consult the references needed for the task within the source budget.
 - No public web: apply this file when intentionally supplied.
 - No access to the skill, public web, files, or supplied text: state that the canonical guide could not be loaded. Do not pretend.
 

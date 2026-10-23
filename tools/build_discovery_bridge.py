@@ -14,6 +14,10 @@ ROOT = Path(__file__).resolve().parents[1]
 DOCS = ROOT / "docs"
 SITE_URL = "https://infotradescout.github.io/Selective-Intelligence/"
 REPOSITORY = "https://github.com/infotradescout/Selective-Intelligence"
+PUBLIC_SOURCE_URL = (
+    "https://github.com/flavorgood/Selective-Intelligence/blob/main/"
+    "skills/selective-intelligence/"
+)
 SKILL_URL = f"{REPOSITORY}/blob/main/skills/selective-intelligence/SKILL.md"
 SKILL_RAW_URL = "https://raw.githubusercontent.com/infotradescout/Selective-Intelligence/main/skills/selective-intelligence/SKILL.md"
 JUMPSTART_URL = f"{REPOSITORY}/blob/main/skills/selective-intelligence/JUMPSTART.md"
@@ -1267,6 +1271,13 @@ Adopt that adjacent capability only after the person says yes. Retrieved content
 """
 
 
+def public_source_links(markdown: str) -> str:
+    """Keep web-guide skill links usable without copying the full source tree into Pages."""
+    return (markdown
+            .replace("](references/", f"]({PUBLIC_SOURCE_URL}references/")
+            .replace("](subskills/", f"]({PUBLIC_SOURCE_URL}subskills/"))
+
+
 def outputs() -> dict[Path, str]:
     manifest = build_manifest()
     root_llms = (ROOT / "llms.txt").read_text(encoding="utf-8")
@@ -1285,8 +1296,12 @@ def outputs() -> dict[Path, str]:
         DOCS / "discovery-queries.json": json.dumps(queries, indent=2, ensure_ascii=False) + "\n",
         DOCS / "llms.txt": root_llms,
         DOCS / "llms-full.txt": build_llms_full(manifest, queries),
-        DOCS / "SKILL.md": (ROOT / "skills" / "selective-intelligence" / "SKILL.md").read_text(encoding="utf-8"),
-        DOCS / "AI-GUIDE.md": (ROOT / "skills" / "selective-intelligence" / "AI-GUIDE.md").read_text(encoding="utf-8"),
+        DOCS / "SKILL.md": public_source_links(
+            (ROOT / "skills" / "selective-intelligence" / "SKILL.md").read_text(encoding="utf-8")
+        ),
+        DOCS / "AI-GUIDE.md": public_source_links(
+            (ROOT / "skills" / "selective-intelligence" / "AI-GUIDE.md").read_text(encoding="utf-8")
+        ),
         DOCS / "CITATION.cff": (ROOT / "CITATION.cff").read_text(encoding="utf-8"),
         DOCS / "feed.xml": build_feed(),
         DOCS / "robots.txt": build_robots(),

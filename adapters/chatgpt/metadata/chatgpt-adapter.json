@@ -20,7 +20,7 @@
   "behavioral_contract": "source_preserved_not_installed_behavior_proof",
   "source_manifest_sha256": "ba6ce62625af30ee29db93e0e4d46ce25ff432180ab3df470decc893b9b54080",
   "source_file_sha256": {
-    "SKILL.md": "3818bcdcacee5558b3dec30d96505657759ef00438004994cb88e9a95fdea8cf",
+    "SKILL.md": "163f473a8f5651c8f3afee92318b0dacc6b57da797d81b0b5ed74dd87eef21e6",
     "VERSION": "326dd5d8641f399990de42def50ac29eb4c9222601c0a0a3fc3c947dd3bec65d",
     "agents/openai.yaml": "5090139b222271205759e9c1cd34fbe154a0aae91221cb9fea47e7ecaf29e56c",
     "assets/icon.svg": "bbd2fc7be4ae81f8ff16bd26e26eab6d8547ef3ba1d6d7e49ba970c9a28fc77f",
@@ -41,7 +41,7 @@
     "references/guided-council.md": "de13f51421e6fdaee36856f437b8e1034172720f177f22652b9c437934a337de",
     "references/human-decision-integrity.md": "42aabbf03a47a25bcb055a06bd94096e1ce306e9c47e29dc3465c2c6b7de45d8",
     "references/intent-intelligence.md": "caf55058d4718c1283faaf4fbda3fc30a043f122a850b9087ab7a6fcc4a08699",
-    "references/model-neutral-execution.md": "d38a2db38251e22d1bc574603b21d5533a4d029b89ebe8232c628589f34cbb76",
+    "references/model-neutral-execution.md": "e74a3b9f092ee44845f6b925bd8e30daf8e8d5cf36403016831c65a8abaacfb1",
     "references/no-paid-capability-recovery.md": "7385144558ee00e270b4c8e1d0980d27d173a06ccbf5c67c5c2dc939426cade4",
     "references/non-developer-surface.md": "9279e7e90ffab079ecb0de8c127ad1e9c04f07d65bc2361cdbf2f8bc4c6e7894",
     "references/operational-safety-gates.md": "f3284e72590c3f32655dec410591085bb02421e7a70c779f4c2fe17bdc17cfa0",
@@ -81,7 +81,7 @@
     "subskills/si-worker/SKILL.md": "d53d69ba98c734aa6e035a119e42cbf3b353fd9652c7d40d8937412415a0c1bc"
   },
   "projected_file_sha256": {
-    "SKILL.md": "5a88644d944bda3d62b44151be09aa96a8551ee010db7ef58bdb63fb535a8189",
+    "SKILL.md": "5aa5ab1813cc2fdce0dfa82608090d5a26b0abfb1e97b89f4418118df4e201cc",
     "VERSION": "326dd5d8641f399990de42def50ac29eb4c9222601c0a0a3fc3c947dd3bec65d",
     "agents/openai.yaml": "5090139b222271205759e9c1cd34fbe154a0aae91221cb9fea47e7ecaf29e56c",
     "assets/icon.svg": "bbd2fc7be4ae81f8ff16bd26e26eab6d8547ef3ba1d6d7e49ba970c9a28fc77f",
@@ -102,7 +102,7 @@
     "references/guided-council.md": "de13f51421e6fdaee36856f437b8e1034172720f177f22652b9c437934a337de",
     "references/human-decision-integrity.md": "42aabbf03a47a25bcb055a06bd94096e1ce306e9c47e29dc3465c2c6b7de45d8",
     "references/intent-intelligence.md": "caf55058d4718c1283faaf4fbda3fc30a043f122a850b9087ab7a6fcc4a08699",
-    "references/model-neutral-execution.md": "d38a2db38251e22d1bc574603b21d5533a4d029b89ebe8232c628589f34cbb76",
+    "references/model-neutral-execution.md": "e74a3b9f092ee44845f6b925bd8e30daf8e8d5cf36403016831c65a8abaacfb1",
     "references/no-paid-capability-recovery.md": "7385144558ee00e270b4c8e1d0980d27d173a06ccbf5c67c5c2dc939426cade4",
     "references/non-developer-surface.md": "9279e7e90ffab079ecb0de8c127ad1e9c04f07d65bc2361cdbf2f8bc4c6e7894",
     "references/operational-safety-gates.md": "f3284e72590c3f32655dec410591085bb02421e7a70c779f4c2fe17bdc17cfa0",

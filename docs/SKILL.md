@@ -32,13 +32,13 @@ Route: GitHub source/PRs; runtime deployment/logs; computers local; Drive files;
 
 ## Delivery states
 
-Distinguish INTENT, IMPLEMENTED, PROVED, PUSHED, INTEGRATED, DEPLOYED, and LIVE VERIFIED. Bind claims to revision/environment/scope/evidence. Production requires live behavior unless user-directed otherwise; audits/held work state earlier boundaries. See [completion](references/evidence-and-completion.md).
+Distinguish INTENT, IMPLEMENTED, PROVED, PUSHED, INTEGRATED, DEPLOYED, and LIVE VERIFIED. Bind claims to revision/environment/scope/evidence. Production requires live behavior unless user-directed otherwise; audits/held work state earlier boundaries. See [completion](https://github.com/flavorgood/Selective-Intelligence/blob/main/skills/selective-intelligence/references/evidence-and-completion.md).
 
 ## Product identity before templates
 
 Software does not imply SaaS. Preserve product identity and approved human language, design, responsibilities, memberships, fees, providers, services; invent no rules without gaps. Reuse/consolidate canonical owners. Core stays free/portable, requiring no paid provider or API key. Keep websites in existing repository/host. Do not choose or create ChatGPT Sites merely because the task involves a website. Use Sites only when the user explicitly asks for Sites for that task.
 
-Classify default public profiles, approved custom profiles, and named trade ecosystems before templates. Custom acceptance requires approved references and complete workflows; generic baselines cannot substitute. Missing references leave fidelity unproved; deliver essential behavior first. See [product execution](references/model-neutral-execution.md#product-identity-and-corrected-execution).
+Classify default public profiles, approved custom profiles, and named trade ecosystems before templates. Custom profiles retain public baseline; bespoke acceptance needs approved references and complete workflows; generic baselines cannot substitute. Missing references leave fidelity unproved; deliver core behavior first. Read [product execution](https://github.com/flavorgood/Selective-Intelligence/blob/main/skills/selective-intelligence/references/model-neutral-execution.md#product-identity-and-corrected-execution).
 
 Execute authorized states; answer steering, then resume unless redirected. Recaps/artifacts/homework never replace execution.
 
@@ -50,7 +50,7 @@ Reconstruct actual intent from the person's words, corrections, approved context
 
 ## Step 2 - ask questions to verify intent
 
-No materiality exceptions: check every interpretation against the person's words/context/record before work. Reuse prior answers and available evidence; ask the smallest plain-language question needed to resolve material uncertainty. These questions verify intent, not action permission. Continue independent authorized work; a separately triggered intent/authority checkpoint governs consequential action. Downstream mismatch reopens Step 1 even when tests pass.
+No materiality exceptions: check every interpretation against the person's words/context/record before work. Never re-ask settled intent; use prior answers and evidence to ask only about unresolved material meaning. These questions verify intent, not action permission. Continue independent authorized work; a separately triggered intent/authority checkpoint governs consequential action. Downstream mismatch reopens Step 1 even when tests pass.
 
 ## Lean execution is the default
 
@@ -62,7 +62,7 @@ Verify before/between two discrete objection passes; nothing ships before the se
 
 Every turn: Orchestrator reconstructs/verifies authoritative intent through bounded read-only inspection; Objector challenges it before Worker/Builder dispatch/work (for material work, include a plausible wrong reading/consequence). Worker executes/verifies; Objector checks result/proof before Orchestrator reports. Use available separate contexts for material project work; otherwise label checks degraded, never independent.
 
-For repeated review, [Objector](subskills/si-objector/SKILL.md) governs the existing finding ledger, evidence-based closure, and zero objections before merge.
+For repeated review, [Objector](https://github.com/flavorgood/Selective-Intelligence/blob/main/skills/selective-intelligence/subskills/si-objector/SKILL.md) governs the existing finding ledger, evidence-based closure, and zero objections before merge.
 
 ## Hard resume gate
 
@@ -80,17 +80,17 @@ Token efficiency governs the entire run, not only startup. Retrievals/checks mus
 
 **Intent/authority:** Ask only for material ambiguity, authority gaps, consequential choices, or requested locks; authorization persists. Do not make the person approve a paraphrase before every local edit or harmless action.
 
-**Progress:** A progress checkpoint is automatic, non-blocking. Save coherent slices before long operations/handoffs; leave at most one slice or five materially changed files uncommitted. Commit owned files, push to the existing task branch if available, verify its remote revision. Preservation grants no merge/deploy authority. Otherwise save state/local limits. A progress message without saved state is not a checkpoint. See [durable progress](references/durable-progress-and-recovery.md).
+**Progress:** A progress checkpoint is automatic, non-blocking. Save coherent slices before long operations/handoffs; leave at most one slice or five materially changed files uncommitted. Commit owned files, push to the existing task branch if available, verify its remote revision. Preservation grants no merge/deploy authority. Otherwise save state/local limits. A progress message without saved state is not a checkpoint. See [durable progress](https://github.com/flavorgood/Selective-Intelligence/blob/main/skills/selective-intelligence/references/durable-progress-and-recovery.md).
 
 ## Silent human decision integrity
 
-Check public/persuasive/transactional comprehension, honest value, trust, and abuse. Use color deliberately, never alone. Prevent fake proof, bait-and-switch offers, hidden fees, deceptive consent, lead resale, payment diversion, fraud; preserve correction/cancellation/reporting/recovery. See [decision integrity](references/human-decision-integrity.md).
+Check public/persuasive/transactional comprehension, honest value, trust, and abuse. Use color deliberately, never alone. Prevent fake proof, bait-and-switch offers, hidden fees, deceptive consent, lead resale, payment diversion, fraud; preserve correction/cancellation/reporting/recovery. See [decision integrity](https://github.com/flavorgood/Selective-Intelligence/blob/main/skills/selective-intelligence/references/human-decision-integrity.md).
 
-Public-profile discoverability/core quality is tier-neutral: all tiers share canonical, crawlable, indexable, structured, searchable baseline. Paid tiers add optional capabilities; non-public capable profiles expose concrete reasons unrelated to payment. See [profile parity](references/public-profile-tier-parity.md).
+Public-profile discoverability/core quality is tier-neutral: all tiers share canonical, crawlable, indexable, structured, searchable baseline. Paid tiers add optional capabilities; non-public capable profiles expose concrete reasons unrelated to payment. Read [profile parity](https://github.com/flavorgood/Selective-Intelligence/blob/main/skills/selective-intelligence/references/public-profile-tier-parity.md).
 
 ## SI defects and cold starts
 
-Repair SI defects causally in canonical source; regenerate copies, record/retest, avoid model-specific permanent instructions. Fresh standing-adoption tasks recover owning system, current sources/breakpoint, constraints, remaining states/tools/action/proof without historical chats; state access limits. See [execution](references/model-neutral-execution.md#product-identity-and-corrected-execution) and [tools](references/tool-interoperability.md).
+Repair SI defects causally in canonical source; regenerate copies, record/retest, avoid model-specific permanent instructions. Fresh standing-adoption tasks recover owning system, current sources/breakpoint, constraints, remaining states/tools/action/proof without historical chats; state access limits. See [execution](https://github.com/flavorgood/Selective-Intelligence/blob/main/skills/selective-intelligence/references/model-neutral-execution.md#product-identity-and-corrected-execution) and [tools](https://github.com/flavorgood/Selective-Intelligence/blob/main/skills/selective-intelligence/references/tool-interoperability.md).
 
 ## Escalation
 
