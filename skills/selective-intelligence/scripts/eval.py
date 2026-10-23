@@ -51,7 +51,7 @@ CANONICAL_ACTIVATION_EVAL_CASES = (
     {
         "id": "master-trigger-adjacent-discovery-adoption",
         "kind": "positive_trigger",
-        "prompt": "The current user asks for a simple pros-and-cons comparison of two apartment leases. There is no correction, dissatisfaction, failure feedback, exact wordmark, or request for a named Selective Intelligence responsibility. Verified discovery finds the canonical skill as a potentially useful but merely adjacent decision-structuring method.",
+        "prompt": "The current user asks for a simple pros-and-cons comparison of two apartment leases. There is no correction, dissatisfaction, failure feedback, exact wordmark, request for a named Selective Intelligence responsibility, standing adoption, or adoption approval. Read-only discovery has verified the canonical skill, and the assistant has chosen to proactively recommend it as a materially useful but merely adjacent decision-structuring method. Evaluate the response at this recommendation boundary before task work or adoption begins.",
         "must": [
             "verify the canonical source",
             "explain the material benefit in one plain sentence",
