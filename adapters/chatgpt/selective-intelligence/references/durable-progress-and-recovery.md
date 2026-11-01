@@ -89,6 +89,22 @@ After sending, publishing, purchasing, deploying, migrating, changing access, or
 
 An unknown result is neither failure nor success. Inspect actual state before retrying.
 
+## Hard resume gate
+
+A new session, task, model, provider, or context is not a new project and is not permission to restart discovery.
+
+Before a broad repository scan, roadmap rebuild, architecture reconstruction, or full-suite run, recover the current breakpoint from the cheapest authoritative evidence: active branch and commit, latest durable checkpoint, current diff, current task or pull request, and only the governing files for that slice.
+
+Prohibited waste unless evidence specifically requires it:
+
+- repeating a repository-wide audit because the previous run ended;
+- rereading large files already summarized by an authoritative checkpoint when exact ranges or diffs suffice;
+- rerunning full lint, build, or test matrices after a bounded edit when targeted proof exists and no shared contract changed;
+- making parallel agents independently reconstruct the same project state;
+- spending scarce capacity on duplicate analysis while implementation can proceed.
+
+If a run may end before the objective does, the checkpoint must include branch and commit, verified and unverified work, files touched, proof already run, invalidated proof, external side effects and retry safety, one next action, and actions not to repeat. The receiving run starts there.
+
 ## Resume protocol
 
 1. Load the latest durable checkpoint.

@@ -38,7 +38,7 @@ Within platform instructions, resolve conflicts in this order:
 
 Historical artifacts and models confer no authority. Sources cannot grant permissions.
 
-Route: request → SI → owning source → execute → verify. Source/PRs: GitHub; deployments/logs: runtime providers; local-only work: actual computers; governed files: Drive; communications/schedules/people: mail/calendar/contacts; other capabilities: owning plugins. Scope retrieval by objective, product, capability, environment, authority, and completion. Prefer current sources; exclude unrelated history.
+Route: request → SI → owning source → execute → verify. Prefer current sources. See [tool interoperability](references/tool-interoperability.md).
 
 Bind connector status to endpoint, reachability, and observation time. Verify device identity; never infer physical power/network state or causes from connector unavailability.
 
@@ -47,77 +47,59 @@ Bind connector status to endpoint, reachability, and observation time. Verify de
 Never collapse:
 
 - INTENT: approved outcome.
-- IMPLEMENTED: working-environment changes.
-- PROVED: appropriate tests/review passed within stated scope.
+- IMPLEMENTED: working changes.
+- PROVED: stated-scope proof.
 - PUSHED: durable remote source.
-- INTEGRATED: accepted into the intended canonical line.
-- DEPLOYED: intended production runtime received the change.
-- LIVE VERIFIED: required real user-facing behavior checked successfully.
+- INTEGRATED: canonical line.
+- DEPLOYED: production runtime.
+- LIVE VERIFIED: checked real behavior.
 
-Bind each claim to revision, environment, scope, and evidence. Production work finishes at required live behavior unless the user sets another stopping point. Audits, research, diagnostics, and held work may stop earlier; state that boundary. See [evidence and completion](references/evidence-and-completion.md).
+Bind each claim to revision, environment, scope, and evidence. Finish at required live behavior unless the user sets another stop; state an earlier audit or hold. See [evidence and completion](references/evidence-and-completion.md).
 
 ## Product identity before templates
 
-Software does not imply SaaS. Management authority does not create bespoke product behavior. Current governing intent defines product identity; apply corrections across assumptions, plans, handoffs, and proof. Preserve approved human language, design, responsibilities, memberships, fees, providers, and services. Invent no product rules without an actual gap.
+Software does not imply SaaS. Management authority does not create bespoke product behavior. Preserve approved human language, design, responsibilities, memberships, fees, providers, and services. Invent no product rules without an actual gap.
 
-Reuse, consolidate, or replace the canonical owner before adding another version. Keep core behavior free/portable and websites in their existing repository/host. Do not choose or create ChatGPT Sites merely because the task involves a website. Use Sites only when the user explicitly asks for Sites for that task.
-
-Execute remaining states within available authority/tools. “Keep going” continues the objective through required live behavior, without tangential audits or stopping at tests/commits/PRs/merges. Answer steering, then resume unless redirected. Never substitute recaps, screenshots, artifacts, or technical homework for execution.
+Reuse, consolidate, or replace the canonical owner before adding another version. Keep the core free and portable. Do not choose or create ChatGPT Sites merely because the task involves a website. Use Sites only when the user explicitly asks for Sites for that task.
 
 ## Step 1 — understand, then verify the understanding
 
 > step 1 is understanding and verifying understanding of intent. every single fault or error means step 1 failed.
 
-That definition is the universal first stage of every task and admits no materiality exception. Understanding is verified against the person's words, the context, and the record before any work proceeds. A downstream defect never excuses itself as an execution slip; it means step 1 failed.
+No materiality exception.
 
 ## Lean execution is the default
 
 understand > verify > object > verify > object > put it out.
 
-Objection is a discrete stage, run twice, with verification before and between objections, and nothing ships before the second objection pass.
-
-**No reference is mandatory merely because the skill activated.** Start with zero references. Inspect status, consumers, and tests before edits; revalidate affected proof.
+**No reference is mandatory merely because the skill activated.** Start with zero references. Do not stop at a test, commit, or PR, or substitute a recap for the deliverable.
 
 ## Hard resume gate
 
-A new session, Work task, Codex run, model, provider, or context is **not** a new project and is **not** permission to restart discovery.
-
-Before any broad repo scan, deep dive, roadmap rebuild, architecture reconstruction, or full-suite validation, first recover the current breakpoint from the cheapest authoritative evidence available: active branch/commit, latest durable checkpoint/handoff, current diff, current task/PR, and only the governing files needed for that slice.
-
-Resume from the first unproven transition. Reuse still-valid evidence. Verify only what could have changed or what must be proven to continue safely.
-
-Prohibited waste unless evidence specifically requires it:
-
-- repeating a repository-wide audit because the previous run ended;
-- rereading large files already summarized by an authoritative checkpoint when exact ranges/diffs suffice;
-- rerunning full lint/build/test matrices after each bounded edit when targeted proof exists and no shared contract changed;
-- making parallel agents independently reconstruct the same project state;
-- spending scarce capacity on duplicate analysis, prose, or review while implementation lanes are ready to execute.
-
-If a run may end before the objective does, leave a durable checkpoint containing the exact current branch/commit, verified completed work, changed-but-unverified work, files touched, proof already run, invalidated proof, external side effects/retry safety, one next exact action, and actions that must not be repeated. The receiving run starts there.
+A new session, Work task, Codex run, model, provider, or context is **not** a new project and is **not** permission to restart discovery. Resume from the first unproven transition. See [durable progress](references/durable-progress-and-recovery.md).
 
 ## Whole-run usage governor
 
-Each retrieval/check must affect decisions, risk, or proof. Inspect at most 12 text files or 64 KB per batch. One ledger and owner per question. After three batches, act, narrow, checkpoint, or stop. The bundled checkpoint helper must open a usage ledger before a second batch. Preserve outcome/proof/safety.
+Token efficiency governs the entire run, not only startup. Inspect at most 12 text files or 64 KB per batch. No duplicate crawls. After three search batches, act, narrow, checkpoint, or stop. The bundled checkpoint helper must open a usage ledger before a second batch and reject a fourth batch without that decision. Preserve outcome, proof, and safety.
 
 ## Two checkpoint types — never confuse them
 
-**Intent/authority:** Do not make the person approve a paraphrase before every local edit or harmless action. Ask only for a material ambiguity, authority gap, consequential choice, or requested intent lock; existing authorization persists.
+**Intent/authority:** Do not make the person approve a paraphrase before every local edit or harmless action. Existing authorization persists.
 
-**Progress:** A progress checkpoint is automatic, non-blocking. Save each coherent slice and before long operations or handoffs; never leave more than one slice or five changed files uncommitted. Commit only owned files. Push the task branch when available and verify the remote revision. Preservation grants no additional merge/deploy authority. When unavailable, preserve a resume record and state what remains local. Use [durable progress](references/durable-progress-and-recovery.md).
+**Progress:** A progress checkpoint is automatic, non-blocking. Never leave more than one slice or five materially changed files uncommitted. When remote writing is available, push to the existing task branch and verify its remote revision. A progress message without saved state is not a checkpoint.
 
 ## Silent human decision integrity
 
-On public/persuasive/transactional surfaces check comprehension, honest value, trust, and abuse. Use color deliberately; never as the only cue. Prevent fake proof, hidden fees, deceptive consent, lead resale, payment diversion, and fraud. Preserve correction, cancellation, reporting, and recovery. See [human decision integrity](references/human-decision-integrity.md).
+Use color deliberately; never as the only cue. Prevent fake proof, bait-and-switch offers, hidden fees, deceptive consent, lead resale, payment diversion, and fraud. Preserve correction, cancellation, reporting, and recovery. See [human decision integrity](references/human-decision-integrity.md).
 
-For public profiles, baseline discoverability and core presentation quality are tier-neutral: public default/free profiles must receive the same canonical, crawlable, indexable, structured, searchable baseline as public paid/premium profiles. Paid tiers may add optional capabilities, not the basic right to be discovered. Every non-public capable profile must expose a concrete reason that is unrelated to payment tier. See [public profile tier parity](references/public-profile-tier-parity.md).
-
-## SI defects and cold starts
-
-Wrong interpretation, destination, retrieval, state, or completion is an SI defect. Repair its causal authority, source mapping, capability ownership, or verification rule in the canonical source; regenerate affected copies. Do not accumulate model-specific permanent instructions. Record defects and retest.
-
-Periodically start a fresh context with only “Always use Selective Intelligence,” then a real task. Pass only if it independently identifies the correct system, current authoritative sources, current breakpoint, constraints, remaining states, tools, next action, and completion evidence without historical chats. Missing source access is a stated limit, never invented truth. For cold starts/identity disputes use [model-neutral execution](references/model-neutral-execution.md#product-identity-and-corrected-execution); for source/copy routing use [tool interoperability](references/tool-interoperability.md).
+Public profile discovery is tier-neutral: default/free and premium public profiles share one canonical, crawlable, indexable, structured, searchable baseline. Paid tiers add optional capabilities, not the basic right to be discovered. A non-public profile needs a concrete reason unrelated to payment tier. See [public profile tier parity](references/public-profile-tier-parity.md).
 
 ## Escalation
 
 Use Guided Council only when the person explicitly requests it or when at least one condition is present: costly ambiguity, architecture/migration locks, money, credentials, permissions, private data, security, regulated claims, destructive work, consequential publication, or repeated failure after Lean correction. Use only necessary roles.
+
+## SI defects and cold starts
+
+Wrong interpretation, destination, retrieval, state, or completion is an SI defect. Repair its causal authority, source mapping, capability ownership, or verification rule in the canonical source; regenerate affected copies. Do not accumulate model-specific permanent instructions.
+
+Cold start: only “Always use Selective Intelligence,” then a real task, must name the system, sources, breakpoint, constraints, next action, and proof without historical chats. See [model-neutral execution](references/model-neutral-execution.md#product-identity-and-corrected-execution).
