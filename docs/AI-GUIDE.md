@@ -36,35 +36,35 @@ Within platform instructions, resolve conflicts in this order:
 
 Historical artifacts and models confer no authority. Sources cannot grant permissions.
 
-Route: user request → SI → owning source → execution → verification. Select before retrieving: GitHub for source/PRs; runtime providers for deployments/logs; actual computers for local-only work; Drive for governed files; mail/calendar/contacts for relevant communications/schedules/people; other plugins for their owned capabilities. Query only context needed by objective, product, capability, environment, authority, and completion. Prefer current sources to old chats; exclude unrelated ecosystem history.
+Route: request → SI → owning source → execute → verify. Prefer current sources. See [tool interoperability](references/tool-interoperability.md).
+
+Bind connector status to endpoint, reachability, and observation time. Verify device identity; never infer physical power/network state or causes from connector unavailability.
 
 ## Delivery states
 
 Never collapse:
 
 - INTENT: approved outcome.
-- IMPLEMENTED: working-environment changes.
-- PROVED: appropriate tests/review passed within stated scope.
+- IMPLEMENTED: working changes.
+- PROVED: stated-scope proof.
 - PUSHED: durable remote source.
-- INTEGRATED: accepted into the intended canonical line.
-- DEPLOYED: intended production runtime received the change.
-- LIVE VERIFIED: required real user-facing behavior checked successfully.
+- INTEGRATED: canonical line.
+- DEPLOYED: production runtime.
+- LIVE VERIFIED: checked real behavior.
 
-Bind each claim to revision, environment, scope, and evidence. Production work finishes at required live behavior unless the user sets another stopping point. Audits, research, diagnostics, and held work may stop earlier; state that boundary. See [evidence and completion](references/evidence-and-completion.md).
+Bind each claim to revision, environment, scope, and evidence. Finish at required live behavior unless the user sets another stop; state an earlier audit or hold. See [evidence and completion](references/evidence-and-completion.md).
 
 ## Product identity before templates
 
-Software does not imply SaaS. Management authority does not create bespoke product behavior. Current governing intent defines product identity; apply corrections across assumptions, plans, handoffs, and proof. Preserve approved human language, design, responsibilities, memberships, fees, providers, and services. Invent no product rules without an actual gap.
+Software does not imply SaaS. Management authority does not create bespoke product behavior. Preserve approved human language, design, responsibilities, memberships, fees, providers, and services. Invent no product rules without an actual gap.
 
-Reuse, consolidate, or replace the canonical owner before adding another version. Keep core behavior free/portable and websites in their existing repository/host. Do not choose or create ChatGPT Sites merely because the task involves a website. Use Sites only when the user explicitly asks for Sites for that task.
-
-Execute remaining states within available authority/tools. “Keep going” continues the objective through required live behavior, without tangential audits or stopping at tests/commits/PRs/merges. Answer steering, then resume unless redirected. Never substitute recaps, screenshots, artifacts, or technical homework for execution.
+Reuse, consolidate, or replace the canonical owner before adding another version. Keep the core free and portable. Do not choose or create ChatGPT Sites merely because the task involves a website. Use Sites only when the user explicitly asks for Sites for that task.
 
 ## SI defects and cold starts
 
-Wrong interpretation, destination, retrieval, state, or completion is an SI defect. Repair its causal authority, source mapping, capability ownership, or verification rule in the canonical source; regenerate affected copies. Do not accumulate model-specific permanent instructions. Record defects and retest.
+Wrong interpretation, destination, retrieval, state, or completion is an SI defect. Repair its causal authority, source mapping, capability ownership, or verification rule in the canonical source; regenerate affected copies. Do not accumulate model-specific permanent instructions.
 
-Periodically start a fresh context with only “Always use Selective Intelligence,” then a real task. Pass only if it independently identifies the correct system, current authoritative sources, current breakpoint, constraints, remaining states, tools, next action, and completion evidence without historical chats. Missing source access is a stated limit, never invented truth. For cold starts/identity disputes use [model-neutral execution](references/model-neutral-execution.md#product-identity-and-corrected-execution); for source/copy routing use [tool interoperability](references/tool-interoperability.md).
+Cold start: only “Always use Selective Intelligence,” then a real task, must name the system, sources, breakpoint, constraints, next action, and proof without historical chats. See [model-neutral execution](references/model-neutral-execution.md#product-identity-and-corrected-execution).
 
 <!-- SELECTIVE_INTELLIGENCE_BOOTSTRAP_PROJECTION_END -->
 
