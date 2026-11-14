@@ -38,6 +38,114 @@ def _now() -> str:
     return datetime.now(UTC).isoformat()
 
 
+def temporal_context(context: dict[str, Any], *, now: str | None = None) -> dict[str, Any]:
+    """Compute wall-clock context from supplied evidence, never infer unseen activity.
+
+    Timestamps must include offsets. Missing values stay unknown; a future observation
+    signals clock/order uncertainty instead of a negative age or fabricated progress.
+    This is a pure calculation, not a scheduler or a source of authorization.
+    """
+    if not isinstance(context, dict):
+        raise ProgressCheckpointError("temporal context must be an object")
+
+    def parse(value: Any, label: str) -> datetime | None:
+        if value is None:
+            return None
+        try:
+            if not isinstance(value, str) or not re.fullmatch(
+                r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,6})?(?:Z|[+-](?:[01]\d|2[0-3]):[0-5]\d)",
+                value,
+            ):
+                raise ValueError()
+            parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
+            if parsed.tzinfo is None or parsed.utcoffset() is None:
+                raise ValueError()
+            return parsed.astimezone(UTC)
+        except (ValueError, OverflowError):
+            raise ProgressCheckpointError(f"{label} must be an offset-aware ISO timestamp or null")
+
+    reference = parse(now if now is not None else _now(), "now")
+    assert reference is not None
+    uncertainty: list[str] = []
+
+    def age(value: Any, label: str) -> float | None:
+        stamp = parse(value, label)
+        if stamp is None:
+            return None
+        seconds = (reference - stamp).total_seconds()
+        if seconds < 0:
+            uncertainty.append(f"{label}: future observation or clock skew")
+            return None
+        return seconds
+
+    def timing(value: Any, label: str) -> dict[str, Any]:
+        stamp = parse(value, label)
+        if stamp is None:
+            return {"state": "unknown", "seconds_remaining": None}
+        seconds = (stamp - reference).total_seconds()
+        return {"state": "due" if seconds <= 0 else "upcoming", "seconds_remaining": seconds}
+
+    result: dict[str, Any] = {
+        "schemaVersion": "si.temporal-context.v1",
+        "as_of": reference.isoformat(),
+        "clock_basis": "supplied_reference" if now is not None else "host_clock",
+        "wait_seconds": age(context.get("requested_at"), "requested_at"),
+        "since_message_seconds": age(context.get("last_message_at"), "last_message_at"),
+        "since_progress_seconds": age(context.get("last_progress_at"), "last_progress_at"),
+        "deadline": timing(context.get("deadline_at"), "deadline_at"),
+        "elapsed_is_active_work": False,
+        "authority_changed": False,
+    }
+    events = context.get("events", [])
+    evidence = context.get("evidence", [])
+    if not isinstance(events, list) or not isinstance(evidence, list) or len(events) > 100 or len(evidence) > 100:
+        raise ProgressCheckpointError("events and evidence must be lists of at most 100 records")
+    result["events"] = []
+    for index, event in enumerate(events):
+        if not isinstance(event, dict):
+            raise ProgressCheckpointError("event must be an object")
+        occurred = parse(event.get("event_at"), f"events[{index}].event_at")
+        received = parse(event.get("received_at"), f"events[{index}].received_at")
+        delay = (received - occurred).total_seconds() if occurred and received else None
+        if delay is not None and delay < 0:
+            uncertainty.append(f"events[{index}]: received before occurrence")
+            delay = None
+        result["events"].append({
+            "input_index": index,
+            "event_at": occurred.isoformat() if occurred else None,
+            "age_seconds": age(event.get("event_at"), f"events[{index}].event_at"),
+            "received_age_seconds": age(event.get("received_at"), f"events[{index}].received_at"),
+            "delivery_delay_seconds": delay,
+        })
+    # Expose occurrence order, not an automatic latest-wins decision across sources.
+    result["known_event_order"] = [event["input_index"] for event in sorted(
+        (event for event in result["events"] if event["event_at"] is not None and event["age_seconds"] is not None),
+        key=lambda event: event["event_at"],
+    )]
+    result["evidence"] = []
+    for index, item in enumerate(evidence):
+        if not isinstance(item, dict):
+            raise ProgressCheckpointError("evidence must be an object")
+        observed = parse(item.get("observed_at"), f"evidence[{index}].observed_at")
+        expiry = parse(item.get("expires_at"), f"evidence[{index}].expires_at")
+        observed_age = age(item.get("observed_at"), f"evidence[{index}].observed_at")
+        if observed and expiry and expiry < observed:
+            raise ProgressCheckpointError("evidence expiry precedes observation")
+        state = "unknown"
+        if observed_age is not None and expiry is not None:
+            state = "expired" if reference >= expiry else "within_time_window"
+        result["evidence"].append({"input_index": index, "age_seconds": observed_age, "freshness": state})
+    wake = context.get("next_check_at")
+    wake_timing = timing(wake, "next_check_at")
+    result["next_check"] = {
+        **wake_timing,
+        "scheduler_receipt_supplied": bool(context.get("scheduler_receipt")),
+        "scheduling_status": "receipt_supplied_not_verified" if context.get("scheduler_receipt") else "not_confirmed",
+    }
+    result["uncertainty"] = uncertainty
+    return result
+
+
 def _run(root: Path, *args: str, check: bool = True) -> subprocess.CompletedProcess[str]:
     completed = subprocess.run(
         list(args), cwd=root, capture_output=True, text=True, check=False
@@ -363,11 +471,13 @@ def checkpoint_status(root: Path) -> dict[str, Any]:
     tracked = project_root / ".selective-intelligence/progress/latest.json"
     private = _private_root(project_root, "progress") / "latest.json"
     latest = tracked if tracked.is_file() else private
+    checkpoint = _read_json(latest, PROGRESS_SCHEMA) if latest.is_file() else None
     return {
         "schemaVersion": "si.progress-checkpoint-status.v1",
+        "temporalContext": temporal_context({"events": [{"event_at": checkpoint.get("createdAt")}]} if checkpoint else {}),
         "projectRoot": str(project_root),
         "latestCheckpoint": (
-            _read_json(latest, PROGRESS_SCHEMA) if latest.is_file() else None
+            checkpoint
         ),
         "currentBranch": (
             _git_value(project_root, "rev-parse", "--abbrev-ref", "HEAD")
@@ -799,6 +909,10 @@ def _parser() -> argparse.ArgumentParser:
     usage_status_parser = subparsers.add_parser("usage-status")
     usage_status_parser.add_argument("--root", default=".")
 
+    temporal = subparsers.add_parser("time-context")
+    temporal.add_argument("--input", required=True, help="JSON temporal evidence; no inferred timestamps")
+    temporal.add_argument("--now", help="Offset-aware reference for deterministic replay")
+
     subparsers.add_parser("self-test")
     return parser
 
@@ -806,7 +920,9 @@ def _parser() -> argparse.ArgumentParser:
 def main() -> int:
     args = _parser().parse_args()
     try:
-        if args.command == "save":
+        if args.command == "time-context":
+            result = temporal_context(json.loads(Path(args.input).read_text(encoding="utf-8")), now=args.now)
+        elif args.command == "save":
             result = save_checkpoint(
                 root=Path(args.root),
                 outcome=args.outcome,

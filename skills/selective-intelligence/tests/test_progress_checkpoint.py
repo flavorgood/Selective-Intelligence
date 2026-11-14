@@ -200,5 +200,82 @@ class ProgressCheckpointTests(unittest.TestCase):
                 )
 
 
+
+class TemporalContextTests(unittest.TestCase):
+    NOW = '2026-11-14T04:00:00Z'
+
+    def time(self, context, now=None):
+        return progress_checkpoint.temporal_context(context, now=now or self.NOW)
+
+    def test_five_seconds_is_not_five_hours_and_not_work(self):
+        brief = self.time({'requested_at': '2026-11-14T03:59:55Z'})
+        long = self.time({'requested_at': '2026-11-13T23:00:00Z'})
+        self.assertEqual(brief['wait_seconds'], 5)
+        self.assertEqual(long['wait_seconds'], 18000)
+        self.assertFalse(long['elapsed_is_active_work'])
+        self.assertFalse(long['authority_changed'])
+        self.assertIsNone(long['since_progress_seconds'])
+
+    def test_missing_stays_unknown(self):
+        result = self.time({})
+        self.assertIsNone(result['wait_seconds'])
+        self.assertEqual(result['deadline']['state'], 'unknown')
+        self.assertEqual(result['next_check']['scheduling_status'], 'not_confirmed')
+
+    def test_future_observation_is_not_negative_age(self):
+        result = self.time({'last_progress_at': '2026-11-14T05:00:00Z'})
+        self.assertIsNone(result['since_progress_seconds'])
+        self.assertTrue(result['uncertainty'])
+
+    def test_offsets_across_daylight_saving(self):
+        result = self.time({'requested_at': '2026-11-01T01:30:00-05:00'}, now='2026-11-01T01:30:00-06:00')
+        self.assertEqual(result['wait_seconds'], 3600)
+
+    def test_naive_date_and_bad_values_rejected(self):
+        for value in ['2026-11-14', '2026-11-14T03:00:00', 'bad', 4, True, '2026-11-14T03:00:00+00:99', '2026-11-14T03+00:00', '2026-11-14T03:00:00.1234567Z']:
+            with self.subTest(value=value), self.assertRaises(progress_checkpoint.ProgressCheckpointError):
+                self.time({'requested_at': value})
+
+    def test_delayed_events_keep_occurrence_separate_from_arrival(self):
+        result = self.time({'events': [
+            {'event_at': '2026-11-14T03:30:00Z', 'received_at': '2026-11-14T03:30:01Z'},
+            {'event_at': '2026-11-14T03:00:00Z', 'received_at': '2026-11-14T03:59:00Z'},
+            {},
+        ]})
+        self.assertEqual(result['known_event_order'], [1, 0])
+        self.assertEqual(result['events'][1]['delivery_delay_seconds'], 3540)
+        self.assertIsNone(result['events'][2]['age_seconds'])
+
+    def test_impossible_arrival_is_flagged(self):
+        result = self.time({'events': [{'event_at': '2026-11-14T03:00:00Z', 'received_at': '2026-11-14T02:59:00Z'}]})
+        self.assertIsNone(result['events'][0]['delivery_delay_seconds'])
+        self.assertTrue(result['uncertainty'])
+
+    def test_evidence_expiry_boundary_and_unknown_lifetime(self):
+        result = self.time({'evidence': [
+            {'observed_at': '2026-11-14T03:00:00Z', 'expires_at': self.NOW},
+            {'observed_at': '2026-11-14T03:00:00Z', 'expires_at': '2026-11-14T04:00:01Z'},
+            {'observed_at': '2026-11-14T03:00:00Z'},
+        ]})
+        self.assertEqual([x['freshness'] for x in result['evidence']], ['expired', 'within_time_window', 'unknown'])
+
+    def test_invalid_expiry_rejected(self):
+        with self.assertRaises(progress_checkpoint.ProgressCheckpointError):
+            self.time({'evidence': [{'observed_at': self.NOW, 'expires_at': '2026-11-14T03:00:00Z'}]})
+
+    def test_deadlines_and_wakes_do_not_schedule(self):
+        result = self.time({'deadline_at': '2026-11-14T03:00:00Z', 'next_check_at': '2026-11-14T05:00:00Z'})
+        self.assertEqual(result['deadline'], {'state': 'due', 'seconds_remaining': -3600})
+        self.assertEqual(result['next_check']['state'], 'upcoming')
+        self.assertEqual(result['next_check']['scheduling_status'], 'not_confirmed')
+        supplied = self.time({'scheduler_receipt': 'example'})
+        self.assertEqual(supplied['next_check']['scheduling_status'], 'receipt_supplied_not_verified')
+
+    def test_lists_are_bounded_and_typed(self):
+        for context in [{'events': 'x'}, {'evidence': [1]}, {'events': [{}] * 101}]:
+            with self.assertRaises(progress_checkpoint.ProgressCheckpointError):
+                self.time(context)
+
+
 if __name__ == "__main__":
     unittest.main()
