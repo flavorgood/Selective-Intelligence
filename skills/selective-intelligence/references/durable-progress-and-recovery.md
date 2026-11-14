@@ -130,3 +130,28 @@ Keep it short:
 **Saved checkpoint:** what is complete, where it is preserved, what proof passed, and what starts next.
 
 A progress message without saved state is not a checkpoint.
+
+## Temporal context
+
+Apply on every message, resume, handoff and status claim. Compare request age, last meaningful progress, deadlines and evidence freshness before choosing the next action. A five-hour wait is not a five-second continuation. Respond to the actual wait instead of repeating an unchanged promise.
+
+The checkpoint tool owns elapsed-time calculations; do not create a parallel history or infer a continuous background worker. `status` reports the checkpoint's age as an event, not as proof that the worker was active since then.
+
+For message/resume decisions, pass a bounded JSON context to:
+
+```sh
+python scripts/progress_checkpoint.py time-context --input temporal-input.json
+```
+
+Use `--now 2026-11-14T04:00:00Z` only for deterministic replay/tests; normal runs use the host clock. Inputs are optional full-second ISO timestamps (up to six fractional digits, with Z or an explicit HH:MM offset; unsupported precision is rejected): `requested_at`, `last_message_at`, `last_progress_at`, `deadline_at`, `next_check_at`; `events` carries separate `event_at` and `received_at`; `evidence` carries `observed_at` and `expires_at`. A `scheduler_receipt` is a reference for checking an existing host schedule, not evidence that this tool scheduled anything. Store only necessary timestamps and references, not copied private conversations.
+
+Interpretation rules:
+
+- Event time describes when something happened. Receipt time describes when this worker learned it. A late callback cannot automatically supersede a newer observed state; compare identity, scope, revision and occurrence time first.
+- Use timezone offsets for arithmetic. Display relative dates in the user's known timezone. Missing timestamps, date-only values and uncertain clocks do not justify exact elapsed-time claims. Missing values remain null; invalid/naive timestamps are rejected; future observations are flagged rather than clamped into fabricated ages.
+- Wall time since a request includes waiting, pauses and disconnections. It is not active work time. Keep last real progress distinct from acknowledgments; repetitive updates do not reset the waiting clock. Handle an overdue promise as a missed commitment, not a new request.
+- Evidence within its time window is not automatically true: revisions, configuration changes, user corrections and source-specific revalidation triggers still invalidate it. Unknown expiry means unknown freshness, not indefinite validity. Expired evidence must be refreshed before a current-state claim.
+- A long gap does not revoke still-valid authorization, but neither does time grant approval. Check whether the approved action's material terms changed. Do not repeat a side effect merely because time passed or its response was delayed.
+- Deadlines and next checks are explicit inputs, never guessed urgency thresholds. Recompute on every resume; do useful independent work while blocked. If future action is promised, use the host's durable scheduler and verify its receipt. This library cannot wake an idle agent and does not claim it can.
+
+Required regression shapes: seconds versus hours, overnight/daylight-saving offset changes, missing/naive/future timestamps, delayed/reversed callbacks, exact expiry boundaries, elapsed time without progress, and planned checks without scheduler confirmation. Deterministic tests prove calculation only; cross-client adoption and real scheduled wakes need separate runtime evidence.
