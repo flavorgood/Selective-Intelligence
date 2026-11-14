@@ -78,6 +78,8 @@ understand > verify > object > verify > object > put it out.
 
 A new session, Work task, Codex run, model, provider, or context is **not** a new project and is **not** permission to restart discovery. Resume from the first unproven transition. See [durable progress](references/durable-progress-and-recovery.md).
 
+Apply [temporal-context](references/durable-progress-and-recovery.md#temporal-context).
+
 ## Whole-run usage governor
 
 Token efficiency governs the entire run, not only startup. Inspect at most 12 text files or 64 KB per batch. No duplicate crawls. After three search batches, act, narrow, checkpoint, or stop. The bundled checkpoint helper must open a usage ledger before a second batch and reject a fourth batch without that decision. Preserve outcome, proof, and safety.
